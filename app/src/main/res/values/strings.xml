@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">aop-part6-chapter01</string>
+    <string name="one_serving">1인분</string>
+
+    <string name="grade_format">%1$,.1f</string>
+
+    <string name="review_count">(%1$d++)</string>
+
+    <string name="delivery_time">%1$d~%2$d분</string>
+
+    <string name="delivery_tip">배달팁 %1$,d원~%2$,d원</string>
 </resources>

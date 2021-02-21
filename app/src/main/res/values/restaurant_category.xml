@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="all">전체</string>
+    <string name="korean_food">한식</string>
+    <string name="dumpling_food">분식</string>
+    <string name="cafe_dessert">카페 디저트</string>
+    <string name="japanese_food">일식•돈까스•회</string>
+    <string name="chinese_food">중식</string>
+    <string name="asian_europe_food">아시안•양식</string>
+    <string name="fast_food">패스트푸드</string>
+    <string name="midnight_food">야식•찜•탕</string>
+    <string name="chicken_pizza">치킨•피자</string>
+
+</resources>
