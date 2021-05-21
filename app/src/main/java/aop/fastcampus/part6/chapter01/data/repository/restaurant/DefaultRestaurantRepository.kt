@@ -1,12 +1,55 @@
 package aop.fastcampus.part6.chapter01.data.repository.restaurant
 
-import aop.fastcampus.part6.chapter01.data.entity.RestaurantEntity
-import aop.fastcampus.part6.chapter01.screen.restaurant.RestaurantCategory
+import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
+import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantEntity
+import aop.fastcampus.part6.chapter01.data.network.MapApiService
+import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantCategory
+import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 
-class DefaultRestaurantRepository : RestaurantRepository {
+class DefaultRestaurantRepository(
+    private val mapApiService: MapApiService,
+    private val resourcesProvider: ResourcesProvider,
+    private val ioDispatcher: CoroutineDispatcher
+) : RestaurantRepository {
 
-    override fun getList(restaurantCategory: RestaurantCategory): List<RestaurantEntity> = when (restaurantCategory) {
-        RestaurantCategory.ALL -> {
+    override suspend fun getList(
+        restaurantCategory: RestaurantCategory,
+        locationLatLngEntity: LocationLatLngEntity
+    ): List<RestaurantEntity> = withContext(ioDispatcher) {
+        val response = mapApiService.getSearchLocationAround(
+            categories = resourcesProvider.getString(restaurantCategory.categoryTypeId),
+            centerLat = locationLatLngEntity.latitude.toString(),
+            centerLon = locationLatLngEntity.longitude.toString(),
+            searchType = "name",
+            radius = "1",
+            resCoordType = "EPSG3857",
+            searchtypCd = "A",
+            reqCoordType = "WGS84GEO"
+        )
+        if (response.isSuccessful) {
+            response.body()?.searchPoiInfo?.pois?.poi?.map {
+                RestaurantEntity(
+                    id = 0,
+                    restaurantCategorys = listOf(RestaurantCategory.ALL),
+                    restaurantTitle = it.name ?: "제목 없음",
+                    restaurantImageUrl = "https://picsum.photos/200",
+                    grade = (1 until 5).random() + ((0..10).random() / 10f),
+                    reviewCount = (0 until 200).random(),
+                    keywords = listOf("블라블라"),
+                    deliveryTimeRange = Pair(0, 20),
+                    deliveryTipRange = Pair(0, 2000)
+                )
+            } ?: listOf()
+        } else {
+            listOf()
+        }
+    }
+
+}
+
+/*RestaurantCategory.ALL -> {
             listOf(
                 RestaurantEntity(
                     id = 0,
@@ -170,7 +213,4 @@ class DefaultRestaurantRepository : RestaurantRepository {
         }
         else -> {
             listOf()
-        }
-    }
-
-}
+        }*/

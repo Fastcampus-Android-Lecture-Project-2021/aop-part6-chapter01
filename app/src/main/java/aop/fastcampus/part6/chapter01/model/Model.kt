@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.DiffUtil
-import aop.fastcampus.part6.chapter01.data.CellType
 
 /**
  * Created by leekijung on 2020. 1. 28..

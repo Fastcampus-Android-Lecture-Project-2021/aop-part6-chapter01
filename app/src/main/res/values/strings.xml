@@ -2,6 +2,8 @@
     <string name="app_name">aop-part6-chapter01</string>
     <string name="one_serving">1인분</string>
 
+    <string name="loading">로딩 중…</string>
+
     <string name="grade_format">%1$,.1f</string>
 
     <string name="review_count">(%1$d++)</string>

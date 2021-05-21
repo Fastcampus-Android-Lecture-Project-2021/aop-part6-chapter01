@@ -1,4 +1,4 @@
-package aop.fastcampus.part6.chapter01.data
+package aop.fastcampus.part6.chapter01.model
 
 enum class CellType {
 

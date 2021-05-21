@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.MainActivity">
+    tools:context=".screen.main.MainFragment">
 
     <androidx.appcompat.widget.Toolbar
         style="?attr/toolbarWithArrowButtonStyle"
@@ -20,11 +20,18 @@
         app:contentInsetEnd="0dp"
         app:contentInsetStart="0dp">
 
+        <ProgressBar
+            android:id="@+id/locationLoading"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"/>
+
         <TextView
+            android:id="@+id/locationTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/one_serving"
+            tools:text="현재 위치"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />

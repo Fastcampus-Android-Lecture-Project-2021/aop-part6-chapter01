@@ -3,7 +3,7 @@ package aop.fastcampus.part6.chapter01.widget.adapter.viewholder
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import aop.fastcampus.part6.chapter01.model.Model
-import aop.fastcampus.part6.chapter01.screen.restaurant.ModelListViewModel
+import aop.fastcampus.part6.chapter01.screen.base.ModelListViewModel
 import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
 
 abstract class ModelViewHolder<M: Model>(

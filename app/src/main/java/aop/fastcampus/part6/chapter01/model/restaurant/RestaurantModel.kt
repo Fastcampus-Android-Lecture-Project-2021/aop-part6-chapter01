@@ -1,9 +1,9 @@
 package aop.fastcampus.part6.chapter01.model.restaurant
 
 import android.os.Parcelable
-import aop.fastcampus.part6.chapter01.data.CellType
+import aop.fastcampus.part6.chapter01.model.CellType
 import aop.fastcampus.part6.chapter01.model.Model
-import aop.fastcampus.part6.chapter01.screen.restaurant.RestaurantCategory
+import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantCategory
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
