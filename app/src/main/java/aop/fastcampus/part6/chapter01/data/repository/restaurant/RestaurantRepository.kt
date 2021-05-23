@@ -6,6 +6,9 @@ import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantCategory
 
 interface RestaurantRepository {
 
-    suspend fun getList(restaurantCategory: RestaurantCategory, locationLatLngEntity: LocationLatLngEntity): List<RestaurantEntity>
+    suspend fun getList(
+        restaurantCategory: RestaurantCategory,
+        locationLatLngEntity: LocationLatLngEntity
+    ): List<RestaurantEntity>
 
 }

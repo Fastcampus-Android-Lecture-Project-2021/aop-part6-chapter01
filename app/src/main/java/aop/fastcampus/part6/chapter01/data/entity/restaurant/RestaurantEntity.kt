@@ -5,7 +5,7 @@ import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantCategory
 
 data class RestaurantEntity(
     override val id: Long,
-    val restaurantCategorys: List<RestaurantCategory>,
+    val restaurantCategory: RestaurantCategory,
     val restaurantTitle: String,
     val restaurantImageUrl: String,
     val grade: Float,

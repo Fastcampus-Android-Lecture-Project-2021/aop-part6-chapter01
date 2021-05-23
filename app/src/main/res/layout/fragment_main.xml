@@ -57,7 +57,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        android:scrollbars="none">
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/filterChipGroup"
@@ -70,7 +71,9 @@
             app:singleSelection="true"
             app:checkedChip="@id/chipDefault"
             android:paddingHorizontal="12dp"
-            app:selectionRequired="true">
+            app:selectionRequired="true"
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipInitialize"
@@ -110,8 +113,25 @@
                 android:layout_height="wrap_content"
                 android:text="@string/default_order"
                 app:chipIconTint="@color/icon_filter_chip_state_list_reset" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTopRate"
+                style="@style/Widget.Aoppart6chapter01.Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/top_rate"
+                app:chipIconTint="@color/icon_filter_chip_state_list_reset" />
+
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_168"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"

@@ -21,6 +21,7 @@ import aop.fastcampus.part6.chapter01.screen.base.BaseFragment
 import aop.fastcampus.part6.chapter01.screen.main.MainViewModel.Companion.MY_LOCATION_KEY
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantCategory
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantListFragment
+import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestautantFilterOrder
 import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationFragment.Companion.LOCATION_CHANGE_REQUEST_KEY
 import aop.fastcampus.part6.chapter01.widget.adapter.RestaurantListFragmentPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -81,13 +82,34 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
         locationTitleTextView.setOnClickListener {
             viewModel.navigateToMyLocation()
         }
-        filterChipGroup.setOnCheckedChangeListener { group, checkedId ->
+        filterChipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.chipDefault -> chipInitialize.isGone = true
-                R.id.chipInitialize -> chipDefault.isChecked = true
-                R.id.chipDeliveryTip -> chipInitialize.isVisible = true
-                R.id.chipFastDelivery -> chipInitialize.isVisible = true
+                R.id.chipDefault -> {
+                    chipInitialize.isGone = true
+                    changeRestaurantFilterOrder(RestautantFilterOrder.DEFAULT)
+                }
+                R.id.chipInitialize -> {
+                    chipDefault.isChecked = true
+                }
+                R.id.chipDeliveryTip -> {
+                    chipInitialize.isVisible = true
+                    changeRestaurantFilterOrder(RestautantFilterOrder.LOW_DELIVERY_TIP)
+                }
+                R.id.chipFastDelivery -> {
+                    chipInitialize.isVisible = true
+                    changeRestaurantFilterOrder(RestautantFilterOrder.FAST_DELIVERY)
+                }
+                R.id.chipTopRate -> {
+                    chipInitialize.isVisible = true
+                    changeRestaurantFilterOrder(RestautantFilterOrder.TOP_RATE)
+                }
             }
+        }
+    }
+
+    private fun changeRestaurantFilterOrder(order: RestautantFilterOrder) {
+        viewPagerAdapter.fragmentList.forEach {
+            it.viewModel.setRestaurantFilterOrder(order)
         }
     }
 
@@ -144,6 +166,7 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
     }
 
     private fun initViewPager(locationLatLng: LocationLatLngEntity) = with(binding) {
+        filterChipGroup.isVisible = true
         viewPager.isSaveEnabled = false
         val restaurantCategories = RestaurantCategory.values()
         if (::viewPagerAdapter.isInitialized.not()) {

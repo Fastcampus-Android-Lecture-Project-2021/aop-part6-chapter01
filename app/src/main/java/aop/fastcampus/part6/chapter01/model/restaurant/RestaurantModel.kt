@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 data class RestaurantModel(
     override val id: Long,
     override val type: CellType = CellType.RESTAURANT_CELL,
-    val restaurantCategorys: List<RestaurantCategory>,
+    val restaurantCategories: RestaurantCategory,
     val restaurantTitle: String,
     val restaurantImageUrl: String,
     val grade: Float,
