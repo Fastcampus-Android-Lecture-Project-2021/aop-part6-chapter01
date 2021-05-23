@@ -1,12 +1,14 @@
 package aop.fastcampus.part6.chapter01.screen.main.restaurant
 
+import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import aop.fastcampus.part6.chapter01.R
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
 import aop.fastcampus.part6.chapter01.data.repository.restaurant.RestaurantRepository
 import aop.fastcampus.part6.chapter01.model.restaurant.RestaurantModel
-import aop.fastcampus.part6.chapter01.screen.base.ModelListViewModel
+import aop.fastcampus.part6.chapter01.screen.base.BaseViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -15,7 +17,13 @@ class RestaurantListViewModel(
     private var locationLatLngEntity: LocationLatLngEntity,
     private val restaurantRepository: RestaurantRepository,
     private var restaurantFilterOrder: RestautantFilterOrder = RestautantFilterOrder.DEFAULT
-) : ModelListViewModel() {
+) : BaseViewModel() {
+
+    companion object {
+
+        const val RESTAURANT_KEY = "Restaurant"
+
+    }
 
     private var _restaurantListLiveData = MutableLiveData<List<RestaurantModel>>()
     val restaurantListLiveData: LiveData<List<RestaurantModel>>
@@ -40,7 +48,7 @@ class RestaurantListViewModel(
         _restaurantListLiveData.value = sortedList.map {
             RestaurantModel(
                 id = it.id,
-                restaurantCategories = it.restaurantCategory,
+                restaurantCategory = it.restaurantCategory,
                 restaurantTitle = it.restaurantTitle,
                 restaurantImageUrl = it.restaurantImageUrl,
                 grade = it.grade,

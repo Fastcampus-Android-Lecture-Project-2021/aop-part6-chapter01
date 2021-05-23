@@ -1,16 +1,17 @@
 package aop.fastcampus.part6.chapter01.screen.mylocation
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
-import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
 import aop.fastcampus.part6.chapter01.R
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
-import aop.fastcampus.part6.chapter01.databinding.FragmentMyLocationBinding
-import aop.fastcampus.part6.chapter01.screen.base.BaseFragment
+import aop.fastcampus.part6.chapter01.data.entity.locaion.MapSearchInfoEntity
+import aop.fastcampus.part6.chapter01.databinding.ActivityMyLocationBinding
+import aop.fastcampus.part6.chapter01.screen.base.BaseActivity
 import aop.fastcampus.part6.chapter01.screen.main.MainViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,17 +19,26 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-class MyLocationFragment: BaseFragment<MyLocationViewModel, FragmentMyLocationBinding>(), OnMapReadyCallback {
+class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationBinding>(), OnMapReadyCallback {
 
-    override val viewModel by viewModel<MyLocationViewModel>()
+    override val viewModel by viewModel<MyLocationViewModel> {
+        parametersOf(
+            intent.getParcelableExtra<MapSearchInfoEntity>(MainViewModel.MY_LOCATION_KEY)
+        )
+    }
 
-    override fun getViewBinding() = FragmentMyLocationBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ActivityMyLocationBinding.inflate(layoutInflater)
 
     companion object {
         const val CAMERA_ZOOM_LEVEL = 17f
 
-        const val LOCATION_CHANGE_REQUEST_KEY = "LOCATION_CHANGE_REQUEST"
+        fun newIntent(context: Context, mapSearchInfoEntity: MapSearchInfoEntity) =
+            Intent(context, MyLocationActivity::class.java).apply {
+                putExtra(MainViewModel.MY_LOCATION_KEY, mapSearchInfoEntity)
+            }
+
     }
 
     private lateinit var map: GoogleMap
@@ -47,7 +57,7 @@ class MyLocationFragment: BaseFragment<MyLocationViewModel, FragmentMyLocationBi
     }
 
     private fun setupGoogleMap() {
-        val mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
@@ -57,9 +67,8 @@ class MyLocationFragment: BaseFragment<MyLocationViewModel, FragmentMyLocationBi
     }
 
     override fun observeData() {
-        super.observeData()
-        viewModel.myLocationStateLiveData.observe(viewLifecycleOwner) {
-            when(it) {
+        viewModel.myLocationStateLiveData.observe(this) {
+            when (it) {
                 is MyLocationState.Loading -> {
                     handleLoadingState()
                 }
@@ -69,13 +78,12 @@ class MyLocationFragment: BaseFragment<MyLocationViewModel, FragmentMyLocationBi
                     }
                 }
                 is MyLocationState.Confirm -> {
-                    setResultAndNavigateUp(
-                        LOCATION_CHANGE_REQUEST_KEY,
-                        bundleOf(
-                            MainViewModel.MY_LOCATION_KEY to it.mapSearchInfoEntity
-                        )
-                    )
+                    setResult(Activity.RESULT_OK, Intent().apply {
+                        putExtra(MainViewModel.MY_LOCATION_KEY, it.mapSearchInfoEntity)
+                    })
+                    finish()
                 }
+                else -> Unit
             }
         }
     }

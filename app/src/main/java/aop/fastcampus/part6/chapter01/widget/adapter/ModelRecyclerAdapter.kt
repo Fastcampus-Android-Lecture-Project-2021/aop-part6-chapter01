@@ -5,16 +5,18 @@ import androidx.recyclerview.widget.ListAdapter
 import aop.fastcampus.part6.chapter01.Part6Chapter01Application
 import aop.fastcampus.part6.chapter01.model.CellType
 import aop.fastcampus.part6.chapter01.model.Model
-import aop.fastcampus.part6.chapter01.screen.base.ModelListViewModel
+import aop.fastcampus.part6.chapter01.screen.base.BaseViewModel
 import aop.fastcampus.part6.chapter01.util.mapper.ModelViewHolderMapper
 import aop.fastcampus.part6.chapter01.util.provider.DefaultResourcesProvider
 import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
+import aop.fastcampus.part6.chapter01.widget.adapter.listener.AdapterListener
 import aop.fastcampus.part6.chapter01.widget.adapter.viewholder.ModelViewHolder
 
-class ModelRecyclerAdapter<M : Model, VM: ModelListViewModel>(
+class ModelRecyclerAdapter<M : Model, VM: BaseViewModel>(
     private var modelList: List<Model>,
     private var viewModel: VM,
-    private val resourcesProvider: ResourcesProvider = DefaultResourcesProvider(Part6Chapter01Application.appContext!!)
+    private val resourcesProvider: ResourcesProvider = DefaultResourcesProvider(Part6Chapter01Application.appContext!!),
+    private val adapterListener: AdapterListener
 ) : ListAdapter<Model, ModelViewHolder<M>>(Model.DIFF_CALLBACK) {
 
     override fun getItemCount(): Int = modelList.size
@@ -29,7 +31,7 @@ class ModelRecyclerAdapter<M : Model, VM: ModelListViewModel>(
     override fun onBindViewHolder(holder: ModelViewHolder<M>, position: Int) {
         with(holder) {
             bindData(modelList[position] as M)
-            bindViews(modelList[position] as M)
+            bindViews(modelList[position] as M, adapterListener)
         }
     }
 

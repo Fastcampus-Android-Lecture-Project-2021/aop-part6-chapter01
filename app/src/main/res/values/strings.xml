@@ -22,4 +22,6 @@
     <string name="low_delivery_tip">배달팁 낮은 순</string>
     <string name="default_order">기본순</string>
     <string name="top_rate">별점 높은 순</string>
+    <string name="my">my</string>
+    <string name="home">홈</string>
 </resources>

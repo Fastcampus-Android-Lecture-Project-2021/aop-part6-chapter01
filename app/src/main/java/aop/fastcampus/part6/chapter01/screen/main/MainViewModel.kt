@@ -1,9 +1,7 @@
 package aop.fastcampus.part6.chapter01.screen.main
 
-import androidx.core.os.bundleOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import aop.fastcampus.part6.chapter01.R
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
 import aop.fastcampus.part6.chapter01.data.entity.locaion.MapSearchInfoEntity
 import aop.fastcampus.part6.chapter01.data.repository.map.MapRepository
@@ -44,17 +42,13 @@ class MainViewModel(
         }
     }
 
-    fun navigateToMyLocation() = viewModelScope.launch {
+    fun getMapSearchInfo(): MapSearchInfoEntity? {
         when (val data = mainStateLiveData.value) {
             is MainState.Success -> {
-                navigateTo(
-                    R.id.action_mainFragment_to_myLocationFragment,
-                    bundleOf(
-                        MY_LOCATION_KEY to data.mapSearchInfoEntity
-                    )
-                )
+                return data.mapSearchInfoEntity
             }
         }
+        return null
     }
 
 }

@@ -2,17 +2,15 @@ package aop.fastcampus.part6.chapter01.screen.main
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.fragment.app.setFragmentResultListener
 import aop.fastcampus.part6.chapter01.R
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
 import aop.fastcampus.part6.chapter01.data.entity.locaion.MapSearchInfoEntity
@@ -22,7 +20,7 @@ import aop.fastcampus.part6.chapter01.screen.main.MainViewModel.Companion.MY_LOC
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantCategory
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantListFragment
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestautantFilterOrder
-import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationFragment.Companion.LOCATION_CHANGE_REQUEST_KEY
+import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationActivity
 import aop.fastcampus.part6.chapter01.widget.adapter.RestaurantListFragmentPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.ext.android.inject
@@ -35,6 +33,8 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
         )
+
+        const val TAG = "MainFragment"
     }
 
     override fun getViewBinding(): FragmentMainBinding = FragmentMainBinding.inflate(layoutInflater)
@@ -47,9 +47,12 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
 
     private lateinit var viewPagerAdapter: RestaurantListFragmentPagerAdapter
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initViews()
+    private val changeLocationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.getParcelableExtra<MapSearchInfoEntity>(MY_LOCATION_KEY)?.let { myLocationInfo ->
+                viewModel.loadReverseGeoInformation(myLocationInfo.locationLatLng)
+            }
+        }
     }
 
     private val locationPermissionLauncher =
@@ -72,15 +75,14 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
         }
 
     override fun initViews() = with(binding) {
-        setFragmentResultListener(LOCATION_CHANGE_REQUEST_KEY) { key, bundle ->
-            if (key == LOCATION_CHANGE_REQUEST_KEY) {
-                bundle.getParcelable<MapSearchInfoEntity>(MY_LOCATION_KEY)?.let { myLocationInfo ->
-                    viewModel.loadReverseGeoInformation(myLocationInfo.locationLatLng)
-                }
-            }
-        }
         locationTitleTextView.setOnClickListener {
-            viewModel.navigateToMyLocation()
+            viewModel.getMapSearchInfo()?.let { mapInfo ->
+                changeLocationLauncher.launch(
+                    MyLocationActivity.newIntent(
+                        requireContext(), mapInfo
+                    )
+                )
+            }
         }
         filterChipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
@@ -143,7 +145,6 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
     }
 
     override fun observeData() {
-        super.observeData()
         viewModel.mainStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is MainState.Uninitialized -> {
@@ -167,7 +168,6 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
 
     private fun initViewPager(locationLatLng: LocationLatLngEntity) = with(binding) {
         filterChipGroup.isVisible = true
-        viewPager.isSaveEnabled = false
         val restaurantCategories = RestaurantCategory.values()
         if (::viewPagerAdapter.isInitialized.not()) {
             val restaurantListFragmentList = restaurantCategories.map {
@@ -197,11 +197,6 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        binding.viewPager.adapter = null
-    }
-
     inner class MyLocationListener : LocationListener {
 
         override fun onLocationChanged(location: Location) {
@@ -214,11 +209,6 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
             removeLocationListener()
         }
 
-    }
-
-    override fun onBackPressed(): Boolean {
-        super.onBackPressed()
-        return true
     }
 
 }

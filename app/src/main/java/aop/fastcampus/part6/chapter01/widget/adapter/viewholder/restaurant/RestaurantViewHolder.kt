@@ -5,13 +5,15 @@ import aop.fastcampus.part6.chapter01.databinding.ViewholderRestaurantBinding
 import aop.fastcampus.part6.chapter01.extensions.clear
 import aop.fastcampus.part6.chapter01.extensions.loadCenterInside
 import aop.fastcampus.part6.chapter01.model.restaurant.RestaurantModel
-import aop.fastcampus.part6.chapter01.screen.base.ModelListViewModel
+import aop.fastcampus.part6.chapter01.screen.base.BaseViewModel
 import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
+import aop.fastcampus.part6.chapter01.widget.adapter.listener.AdapterListener
+import aop.fastcampus.part6.chapter01.widget.adapter.listener.restaurant.RestaurantListListener
 import aop.fastcampus.part6.chapter01.widget.adapter.viewholder.ModelViewHolder
 
 class RestaurantViewHolder(
     private val binding: ViewholderRestaurantBinding,
-    viewModel: ModelListViewModel,
+    viewModel: BaseViewModel,
     resourcesProvider: ResourcesProvider
 ): ModelViewHolder<RestaurantModel>(binding, viewModel, resourcesProvider) {
 
@@ -34,7 +36,12 @@ class RestaurantViewHolder(
         }
     }
 
-    override fun bindViews(model: RestaurantModel) {
+    override fun bindViews(model: RestaurantModel, adapterListener: AdapterListener) = with(binding) {
+        if (adapterListener is RestaurantListListener) {
+            root.setOnClickListener {
+                adapterListener.onClickItem(model)
+            }
+        }
     }
 
 

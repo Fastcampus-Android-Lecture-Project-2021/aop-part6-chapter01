@@ -1,14 +1,12 @@
 package aop.fastcampus.part6.chapter01.screen.base
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.os.PersistableBundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.Job
 
-abstract class BaseFragment<VM: BaseViewModel, VB: ViewBinding>: Fragment() {
+abstract class BaseActivity<VM: BaseViewModel, VB: ViewBinding>: AppCompatActivity() {
 
     abstract val viewModel: VM
 
@@ -18,20 +16,14 @@ abstract class BaseFragment<VM: BaseViewModel, VB: ViewBinding>: Fragment() {
 
     private lateinit var fetchJob: Job
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding = getViewBinding()
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        setContentView(binding.root)
         initState()
     }
 
     open fun initState() {
-        arguments?.let {
-            viewModel.storeState(it)
-        }
         initViews()
         fetchJob = viewModel.fetchData()
         observeData()
@@ -41,11 +33,11 @@ abstract class BaseFragment<VM: BaseViewModel, VB: ViewBinding>: Fragment() {
 
     abstract fun observeData()
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
         if (fetchJob.isActive) {
             fetchJob.cancel()
         }
+        super.onDestroy()
     }
 
 }

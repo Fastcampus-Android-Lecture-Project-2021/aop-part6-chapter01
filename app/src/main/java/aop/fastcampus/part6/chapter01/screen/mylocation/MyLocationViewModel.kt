@@ -12,6 +12,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MyLocationViewModel(
+    private val mapSearchInfoEntity: MapSearchInfoEntity,
     private val mapRepository: MapRepository,
     private val userRepository: UserRepository
 ): BaseViewModel() {
@@ -20,13 +21,9 @@ class MyLocationViewModel(
 
     override fun fetchData(): Job = viewModelScope.launch {
         myLocationStateLiveData.value = MyLocationState.Loading
-        stateBundle?.let { bundle ->
-            bundle.getParcelable<MapSearchInfoEntity>(MainViewModel.MY_LOCATION_KEY)?.let { locationInfo ->
-                myLocationStateLiveData.value = MyLocationState.Success(
-                    locationInfo
-                )
-            }
-        }
+        myLocationStateLiveData.value = MyLocationState.Success(
+            mapSearchInfoEntity
+        )
     }
 
     fun changeLocationInfo(
