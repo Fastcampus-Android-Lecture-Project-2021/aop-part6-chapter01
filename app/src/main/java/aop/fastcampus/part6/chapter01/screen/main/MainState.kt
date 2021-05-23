@@ -9,7 +9,8 @@ sealed class MainState {
     object Loading: MainState()
 
     data class Success(
-        val mapSearchInfoEntity: MapSearchInfoEntity
+        val mapSearchInfoEntity: MapSearchInfoEntity,
+        val isLocationSame: Boolean
     ): MainState()
 
 }

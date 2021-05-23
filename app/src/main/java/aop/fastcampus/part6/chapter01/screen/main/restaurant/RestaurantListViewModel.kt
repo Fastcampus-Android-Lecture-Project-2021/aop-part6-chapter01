@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class RestaurantListViewModel(
     private val restaurantCategory: RestaurantCategory,
-    private val locationLatLngEntity: LocationLatLngEntity,
+    private var locationLatLngEntity: LocationLatLngEntity,
     private val restaurantRepository: RestaurantRepository
 ): ModelListViewModel() {
 
@@ -38,5 +38,9 @@ class RestaurantListViewModel(
         }
     }
 
+    fun setLocationLatLng(locationLatLngEntity: LocationLatLngEntity) {
+        this.locationLatLngEntity = locationLatLngEntity
+        fetchData()
+    }
 
 }

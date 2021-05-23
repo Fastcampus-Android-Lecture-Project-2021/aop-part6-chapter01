@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.main.MainFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        style="?attr/toolbarWithArrowButtonStyle"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        android:fitsSystemWindows="false"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:contentInsetEnd="0dp"
+        app:contentInsetStart="0dp">
+
+        <ProgressBar
+            android:id="@+id/locationLoading"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/locationTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="현재 위치"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+    <View
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/ic_location"
+        app:layout_constraintStart_toStartOf="@id/mapFragment"
+        app:layout_constraintEnd_toEndOf="@id/mapFragment"
+        app:layout_constraintTop_toTopOf="@id/mapFragment"
+        app:layout_constraintBottom_toBottomOf="@id/mapFragment"/>
+
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="@string/set_this_location"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

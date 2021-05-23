@@ -68,39 +68,48 @@
             app:chipSpacingVertical="6dp"
             app:singleLine="true"
             app:singleSelection="true"
-            app:checkedChip="@id/chip2"
+            app:checkedChip="@id/chipDefault"
             android:paddingHorizontal="12dp"
             app:selectionRequired="true">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip1"
+                android:id="@+id/chipInitialize"
                 style="@style/Widget.Aoppart6chapter01.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="초기화"
+                android:text="@string/initialize"
                 app:chipIconEnabled="true"
                 app:chipIcon="@drawable/ic_refresh"
-                app:chipIconTint="@color/icon_filter_chip_state_list_reset" />
+                app:chipIconTint="@color/icon_filter_chip_state_list_reset"
+                android:visibility="gone"/>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip2"
+                android:id="@+id/chipFastDelivery"
                 style="@style/Widget.Aoppart6chapter01.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="배달 빠른 순"
+                android:text="@string/fast_delivery"
                 app:chipIcon="@drawable/ic_thunder"
                 app:chipIconTint="@color/icon_filter_chip_state_list_delivery_fast"
                 app:chipIconEnabled="true"/>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip3"
+                android:id="@+id/chipDeliveryTip"
                 style="@style/Widget.Aoppart6chapter01.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="배달팁 낮은 순"
+                android:text="@string/low_delivery_tip"
                 app:chipIcon="@drawable/ic_down"
                 app:chipIconTint="@color/icon_filter_chip_state_list_low_delivery_tip"
                 app:chipIconEnabled="true"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipDefault"
+                style="@style/Widget.Aoppart6chapter01.Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_order"
+                app:chipIconTint="@color/icon_filter_chip_state_list_reset" />
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>
 

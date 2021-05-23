@@ -25,10 +25,9 @@ class RestaurantListFragment : BaseFragment<RestaurantListViewModel, FragmentRes
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        observeData()
     }
 
-    private fun initViews() = with(binding) {
+    override fun initViews() = with(binding) {
         restaurantRecyclerVIew.adapter = adapter
     }
 
