@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 abstract class Model(
     open val id: Long,
     open val type: CellType,
-) : Parcelable {
+) {
 
     companion object {
         val DIFF_CALLBACK: DiffUtil.ItemCallback<Model> = object : DiffUtil.ItemCallback<Model>() {

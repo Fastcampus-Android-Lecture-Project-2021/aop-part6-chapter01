@@ -29,11 +29,11 @@ class DefaultRestaurantRepository(
             reqCoordType = "WGS84GEO"
         )
         if (response.isSuccessful) {
-            response.body()?.searchPoiInfo?.pois?.poi?.map {
+            response.body()?.searchPoiInfo?.pois?.poi?.mapIndexed { index, poi ->
                 RestaurantEntity(
-                    id = 0,
+                    id = (1..10).random().toLong(),
                     restaurantCategory = restaurantCategory,
-                    restaurantTitle = it.name ?: "제목 없음",
+                    restaurantTitle = poi.name ?: "제목 없음",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
                     reviewCount = (0 until 200).random(),

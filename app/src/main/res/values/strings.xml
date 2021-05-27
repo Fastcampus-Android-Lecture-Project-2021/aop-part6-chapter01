@@ -24,4 +24,10 @@
     <string name="top_rate">별점 높은 순</string>
     <string name="my">my</string>
     <string name="home">홈</string>
+    <string name="call">전화</string>
+    <string name="like">찜</string>
+    <string name="share">공유</string>
+
+    <string name="delivery_expected_time">%1$d~%2$d분 소요 예정</string>
+    <string name="delivery_tip_range">%1$,d원 ~ %2$,d원</string>
 </resources>

@@ -27,6 +27,12 @@ object ModelViewHolderMapper {
                     viewModel,
                     resourcesProvider
                 )
+            CellType.FOOD_CELL ->
+                RestaurantViewHolder(
+                    ViewholderRestaurantBinding.inflate(inflater, parent, false),
+                    viewModel,
+                    resourcesProvider
+                )
         }
 
         return viewHolder as ModelViewHolder<M>

@@ -1,6 +1,6 @@
 package aop.fastcampus.part6.chapter01.data.repository.user
 
-import aop.fastcampus.part6.chapter01.data.db.LocationDao
+import aop.fastcampus.part6.chapter01.data.db.dao.LocationDao
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
