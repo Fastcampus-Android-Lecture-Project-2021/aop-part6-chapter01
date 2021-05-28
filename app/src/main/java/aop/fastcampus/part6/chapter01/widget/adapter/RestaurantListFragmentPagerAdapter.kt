@@ -6,20 +6,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantListFragment
 
-class RestaurantListFragmentPagerAdapter : FragmentStateAdapter {
-
-    val fragmentList: List<RestaurantListFragment>
-
+class RestaurantListFragmentPagerAdapter(
+    fragment: Fragment,
+    val fragmentList: List<RestaurantListFragment>,
     val locationLatLng: LocationLatLngEntity
-
-    constructor(
-        fragment: Fragment,
-        fragmentList: List<RestaurantListFragment>,
-        locationLatLng: LocationLatLngEntity
-    ): super(fragment) {
-        this.fragmentList = fragmentList
-        this.locationLatLng = locationLatLng
-    }
+) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int = fragmentList.size
 

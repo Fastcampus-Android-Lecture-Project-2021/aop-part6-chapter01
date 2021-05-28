@@ -31,7 +31,8 @@ class DefaultRestaurantRepository(
         if (response.isSuccessful) {
             response.body()?.searchPoiInfo?.pois?.poi?.mapIndexed { index, poi ->
                 RestaurantEntity(
-                    id = (1..10).random().toLong(),
+                    id = hashCode().toLong(),
+                    restaurantInfoId = (1..10).random().toLong(),
                     restaurantCategory = restaurantCategory,
                     restaurantTitle = poi.name ?: "제목 없음",
                     restaurantImageUrl = "https://picsum.photos/200",

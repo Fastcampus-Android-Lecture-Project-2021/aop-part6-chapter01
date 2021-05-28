@@ -8,6 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class RestaurantEntity(
     override val id: Long,
+    val restaurantInfoId: Long,
     val restaurantCategory: RestaurantCategory,
     val restaurantTitle: String,
     val restaurantImageUrl: String,

@@ -178,13 +178,13 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
                 restaurantListFragmentList,
                 locationLatLng
             )
+            viewPager.adapter = viewPagerAdapter
         }
         if (locationLatLng != viewPagerAdapter.locationLatLng) {
             viewPagerAdapter.fragmentList.forEach {
                 it.viewModel.setLocationLatLng(locationLatLng)
             }
         }
-        viewPager.adapter = viewPagerAdapter
         viewPager.offscreenPageLimit = restaurantCategories.size
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.setText(RestaurantCategory.values()[position].categoryNameId)

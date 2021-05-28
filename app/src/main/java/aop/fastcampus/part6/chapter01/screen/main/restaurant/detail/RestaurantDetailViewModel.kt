@@ -21,7 +21,7 @@ class RestaurantDetailViewModel(
             restaurantEntity = restaurantEntity
         )
         restaurantDetailStateLiveData.value = RestaurantDetailState.Loading
-        val foods = restaurantFoodRepository.getFoods(restaurantEntity.id)
+        val foods = restaurantFoodRepository.getFoods(restaurantEntity.restaurantInfoId)
         restaurantDetailStateLiveData.value = RestaurantDetailState.Success(
             restaurantEntity = restaurantEntity,
             restaurantFoodList = foods

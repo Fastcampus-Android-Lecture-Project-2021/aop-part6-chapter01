@@ -46,6 +46,7 @@ class RestaurantListViewModel(
         _restaurantListLiveData.value = sortedList.map {
             RestaurantModel(
                 id = it.id,
+                restaurantInfoId = it.restaurantInfoId,
                 restaurantCategory = it.restaurantCategory,
                 restaurantTitle = it.restaurantTitle,
                 restaurantImageUrl = it.restaurantImageUrl,
