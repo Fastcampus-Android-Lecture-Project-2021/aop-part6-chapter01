@@ -14,25 +14,17 @@ class RestaurantDetailViewModel(
     private val restaurantFoodRepository: RestaurantFoodRepository
 ) : BaseViewModel() {
 
-    val restaurantDetailStateLivedata = MutableLiveData<RestaurantDetailState>(RestaurantDetailState.Uninitialized)
+    val restaurantDetailStateLiveData = MutableLiveData<RestaurantDetailState>(RestaurantDetailState.Uninitialized)
 
     override fun fetchData(): Job = viewModelScope.launch {
-        restaurantDetailStateLivedata.value = RestaurantDetailState.Success(
+        restaurantDetailStateLiveData.value = RestaurantDetailState.Success(
             restaurantEntity = restaurantEntity
         )
-        restaurantDetailStateLivedata.value = RestaurantDetailState.Loading
+        restaurantDetailStateLiveData.value = RestaurantDetailState.Loading
         val foods = restaurantFoodRepository.getFoods(restaurantEntity.id)
-        restaurantDetailStateLivedata.value = RestaurantDetailState.Success(
+        restaurantDetailStateLiveData.value = RestaurantDetailState.Success(
             restaurantEntity = restaurantEntity,
-            restaurantFoodModelList = foods.map {
-                FoodModel(
-                    id = it.id,
-                    title = it.title,
-                    description = it.description,
-                    price = it.price,
-                    imageUrl = it.imageUrl
-                )
-            }
+            restaurantFoodList = foods
         )
     }
 

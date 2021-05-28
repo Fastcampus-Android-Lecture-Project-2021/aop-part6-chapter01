@@ -1,10 +1,8 @@
 package aop.fastcampus.part6.chapter01.screen.main.restaurant
 
-import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import aop.fastcampus.part6.chapter01.R
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
 import aop.fastcampus.part6.chapter01.data.repository.restaurant.RestaurantRepository
 import aop.fastcampus.part6.chapter01.model.restaurant.RestaurantModel

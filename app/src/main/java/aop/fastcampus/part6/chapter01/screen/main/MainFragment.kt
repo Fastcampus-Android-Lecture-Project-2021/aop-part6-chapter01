@@ -23,7 +23,7 @@ import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestautantFilterOrd
 import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationActivity
 import aop.fastcampus.part6.chapter01.widget.adapter.RestaurantListFragmentPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
 
@@ -39,7 +39,7 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
 
     override fun getViewBinding(): FragmentMainBinding = FragmentMainBinding.inflate(layoutInflater)
 
-    override val viewModel by inject<MainViewModel>()
+    override val viewModel by viewModel<MainViewModel>()
 
     private lateinit var locationManager: LocationManager
 

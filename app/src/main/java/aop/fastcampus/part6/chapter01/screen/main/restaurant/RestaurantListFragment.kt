@@ -2,23 +2,23 @@ package aop.fastcampus.part6.chapter01.screen.main.restaurant
 
 import android.os.Bundle
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
-import aop.fastcampus.part6.chapter01.databinding.FragmentRestaurantListBinding
+import aop.fastcampus.part6.chapter01.databinding.FragmentListBinding
 import aop.fastcampus.part6.chapter01.model.restaurant.RestaurantModel
 import aop.fastcampus.part6.chapter01.screen.base.BaseFragment
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.detail.RestaurantDetailActivity
 import aop.fastcampus.part6.chapter01.widget.adapter.ModelRecyclerAdapter
 import aop.fastcampus.part6.chapter01.widget.adapter.listener.restaurant.RestaurantListListener
-import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class RestaurantListFragment : BaseFragment<RestaurantListViewModel, FragmentRestaurantListBinding>() {
+class RestaurantListFragment : BaseFragment<RestaurantListViewModel, FragmentListBinding>() {
 
-    override fun getViewBinding(): FragmentRestaurantListBinding = FragmentRestaurantListBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentListBinding = FragmentListBinding.inflate(layoutInflater)
 
     private val restaurantCategory by lazy { arguments?.getSerializable(RESTAURANT_CATEGORY_KEY) as RestaurantCategory }
     private val locationLatLngEntity by lazy<LocationLatLngEntity> { arguments?.getParcelable(LOCATION_KEY)!! }
 
-    override val viewModel by inject<RestaurantListViewModel> { parametersOf(restaurantCategory, locationLatLngEntity) }
+    override val viewModel by viewModel<RestaurantListViewModel> { parametersOf(restaurantCategory, locationLatLngEntity) }
 
     private val adapter by lazy {
         ModelRecyclerAdapter<RestaurantModel, RestaurantListViewModel>(listOf(), viewModel, adapterListener = object : RestaurantListListener {
@@ -31,7 +31,7 @@ class RestaurantListFragment : BaseFragment<RestaurantListViewModel, FragmentRes
     }
 
     override fun initViews() = with(binding) {
-        restaurantRecyclerVIew.adapter = adapter
+        recyclerVIew.adapter = adapter
     }
 
     override fun observeData() {

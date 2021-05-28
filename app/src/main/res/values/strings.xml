@@ -12,6 +12,8 @@
 
     <string name="delivery_tip">배달팁 %1$,d원~%2$,d원</string>
 
+    <string name="price">%,d원</string>
+
     <string name="set_this_location">이 위치로 주소 설정</string>
 
     <string name="please_request_location_permission">위치 권한을 설정해주세요!</string>

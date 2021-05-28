@@ -10,11 +10,26 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/menuAndReviewTabLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_collapseMode="pin"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/menuAndReviewViewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menuAndReviewTabLayout"/>
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -24,8 +39,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/ic_basket" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -179,7 +204,7 @@
                     app:layout_constraintTop_toBottomOf="@id/deliveryTimeTitleText"
                     app:layout_constraintStart_toStartOf="@id/deliveryTimeTitleText"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintBottom_toTopOf="@id/menuAndReviewTabLayout"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginBottom="24dp"
                     android:textStyle="bold" />
 
@@ -192,15 +217,6 @@
                     app:layout_constraintBottom_toBottomOf="@id/deliveryTipTitleText"
                     android:layout_marginStart="16dp"
                     tools:text="1000원 ~ 2400원"/>
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/menuAndReviewTabLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/deliveryTipTitleText"
-                    app:layout_constraintBottom_toBottomOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
