@@ -34,7 +34,9 @@ class FoodMenuViewHolder(
 
     override fun bindViews(model: FoodModel, adapterListener: AdapterListener) {
         if (adapterListener is FoodMenuListListener) {
-            adapterListener.onClickItem(model)
+            binding.root.setOnClickListener {
+                adapterListener.onClickItem(model)
+            }
         }
     }
 

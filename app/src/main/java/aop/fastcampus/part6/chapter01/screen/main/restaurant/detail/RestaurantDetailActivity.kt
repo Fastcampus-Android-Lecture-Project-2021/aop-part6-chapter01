@@ -1,5 +1,6 @@
 package aop.fastcampus.part6.chapter01.screen.main.restaurant.detail
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import androidx.core.view.isGone
@@ -11,6 +12,7 @@ import aop.fastcampus.part6.chapter01.databinding.ActivityRestaurantDetailBindin
 import aop.fastcampus.part6.chapter01.extensions.fromDpToPx
 import aop.fastcampus.part6.chapter01.extensions.load
 import aop.fastcampus.part6.chapter01.screen.base.BaseActivity
+import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantListFragment
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantListViewModel
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.detail.menu.RestaurantMenuListFragment
 import aop.fastcampus.part6.chapter01.widget.adapter.RestaurantDetailListFragmentPagerAdapter
@@ -20,11 +22,11 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import kotlin.math.abs
 
-class RestaurantDetailActivity: BaseActivity<RestaurantDetailViewModel, ActivityRestaurantDetailBinding>() {
+class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, ActivityRestaurantDetailBinding>() {
 
     override val viewModel by viewModel<RestaurantDetailViewModel> {
         parametersOf(
-            intent.getParcelableExtra<RestaurantEntity>(RestaurantListViewModel.RESTAURANT_KEY)
+            intent.getParcelableExtra<RestaurantEntity>(RestaurantListFragment.RESTAURANT_KEY)
         )
     }
 
@@ -32,7 +34,7 @@ class RestaurantDetailActivity: BaseActivity<RestaurantDetailViewModel, Activity
 
     companion object {
         fun newIntent(context: Context, restaurantEntity: RestaurantEntity) = Intent(context, RestaurantDetailActivity::class.java).apply {
-            putExtra(RestaurantListViewModel.RESTAURANT_KEY, restaurantEntity)
+            putExtra(RestaurantListFragment.RESTAURANT_KEY, restaurantEntity)
         }
     }
 
@@ -63,7 +65,7 @@ class RestaurantDetailActivity: BaseActivity<RestaurantDetailViewModel, Activity
     }
 
     override fun observeData() = viewModel.restaurantDetailStateLiveData.observe(this) {
-        when(it) {
+        when (it) {
             is RestaurantDetailState.Uninitialized -> {
 
             }
@@ -88,24 +90,67 @@ class RestaurantDetailActivity: BaseActivity<RestaurantDetailViewModel, Activity
         restaurantImage.load(restaurantEntity.restaurantImageUrl)
         restaurantMainTitleTextView.text = restaurantEntity.restaurantTitle
         ratingBar.rating = restaurantEntity.grade
-        deliveryTimeText.text = getString(R.string.delivery_expected_time, restaurantEntity.deliveryTimeRange.first, restaurantEntity.deliveryTimeRange.second)
-        deliveryTipText.text = getString(R.string.delivery_tip_range, restaurantEntity.deliveryTipRange.first, restaurantEntity.deliveryTipRange.second)
+        deliveryTimeText.text =
+            getString(R.string.delivery_expected_time, restaurantEntity.deliveryTimeRange.first, restaurantEntity.deliveryTimeRange.second)
+        deliveryTipText.text =
+            getString(R.string.delivery_tip_range, restaurantEntity.deliveryTipRange.first, restaurantEntity.deliveryTipRange.second)
 
-        initViewPager(state.restaurantFoodList)
+        if (::viewPagerAdapter.isInitialized.not()) {
+            initViewPager(state.restaurantEntity.restaurantInfoId, state.restaurantFoodList)
+        }
+
+        notifyBasketCount(state.foodMenuListInBasket)
+
+        val (isClearNeed, afterAction) = state.isClearNeedInBasketAndAction
+
+        if (isClearNeed) {
+            alertClearNeedInBasket(afterAction)
+        }
     }
 
-    private fun initViewPager(restaurantFoodList: List<RestaurantFoodEntity>?) = with(binding) {
+    private fun initViewPager(restaurantId: Long, restaurantFoodList: List<RestaurantFoodEntity>?) = with(binding) {
         viewPagerAdapter = RestaurantDetailListFragmentPagerAdapter(
             this@RestaurantDetailActivity,
             listOf(
-                RestaurantMenuListFragment.newInstance(ArrayList(restaurantFoodList ?: listOf())),
-                RestaurantMenuListFragment.newInstance(ArrayList(restaurantFoodList ?: listOf())),
+                RestaurantMenuListFragment.newInstance(
+                    restaurantId,
+                    ArrayList(restaurantFoodList ?: listOf())
+                ),
+                RestaurantMenuListFragment.newInstance(
+                    restaurantId,
+                    ArrayList(restaurantFoodList ?: listOf())
+                ),
             )
         )
         menuAndReviewViewPager.adapter = viewPagerAdapter
         TabLayoutMediator(menuAndReviewTabLayout, menuAndReviewViewPager) { tab, position ->
             tab.setText(RestaurantDetailCategory.values()[position].categoryNameId)
         }.attach()
+    }
+
+    private fun notifyBasketCount(foodMenuListInBasket: List<RestaurantFoodEntity>?) = with(binding) {
+        basketCountTextView.text =
+            if (foodMenuListInBasket.isNullOrEmpty()) {
+                "0"
+            } else {
+                getString(R.string.basket_count, foodMenuListInBasket.size)
+            }
+    }
+
+    private fun alertClearNeedInBasket(afterAction: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setTitle("장바구니에는 같은 가게의 메뉴만 담을 수 있습니다.")
+            .setMessage("선택하신 메뉴를 장바구니에 담을 경우 이전에 담은 메뉴가 삭제됩니다.")
+            .setPositiveButton("담기") { dialog, _ ->
+                viewModel.notifyClearBasket()
+                afterAction()
+                dialog.dismiss()
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 
 }

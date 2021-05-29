@@ -18,6 +18,8 @@
 
     <string name="please_request_location_permission">위치 권한을 설정해주세요!</string>
 
+    <string name="basket_count">+%d</string>
+
     <string name="can_not_assigned_permission">권한을 받지 못했습니다.</string>
     <string name="initialize">초기화</string>
     <string name="fast_delivery">배달 빠른 순</string>

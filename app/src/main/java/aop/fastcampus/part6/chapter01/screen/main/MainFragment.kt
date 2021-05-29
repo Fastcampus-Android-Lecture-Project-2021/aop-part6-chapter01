@@ -164,6 +164,23 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
                 }
             }
         }
+        viewModel.foodMenuBasketLiveData.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                binding.basketButtonContainer.isVisible = true
+                binding.basketCountTextView.text = getString(R.string.basket_count, it.size)
+                binding.basketButton.setOnClickListener {
+
+                }
+            } else {
+                binding.basketButtonContainer.isGone = true
+                binding.basketButton.setOnClickListener(null)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.checkMyBasket()
     }
 
     private fun initViewPager(locationLatLng: LocationLatLngEntity) = with(binding) {

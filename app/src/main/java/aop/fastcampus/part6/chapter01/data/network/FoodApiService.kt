@@ -12,6 +12,4 @@ interface FoodApiService {
         @Path("restaurantId") restaurantId: Long
     ): Response<List<RestaurantFoodResponse>>
 
-
-
 }

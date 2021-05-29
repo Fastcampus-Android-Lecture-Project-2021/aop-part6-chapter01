@@ -17,12 +17,6 @@ class RestaurantListViewModel(
     private var restaurantFilterOrder: RestautantFilterOrder = RestautantFilterOrder.DEFAULT
 ) : BaseViewModel() {
 
-    companion object {
-
-        const val RESTAURANT_KEY = "Restaurant"
-
-    }
-
     private var _restaurantListLiveData = MutableLiveData<List<RestaurantModel>>()
     val restaurantListLiveData: LiveData<List<RestaurantModel>>
         get() = _restaurantListLiveData

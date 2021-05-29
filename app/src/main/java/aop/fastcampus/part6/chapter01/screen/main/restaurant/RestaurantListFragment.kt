@@ -41,6 +41,7 @@ class RestaurantListFragment : BaseFragment<RestaurantListViewModel, FragmentLis
     }
 
     companion object {
+        const val RESTAURANT_KEY = "Restaurant"
         const val RESTAURANT_CATEGORY_KEY = "restaurantCategory"
         const val LOCATION_KEY = "location"
 
