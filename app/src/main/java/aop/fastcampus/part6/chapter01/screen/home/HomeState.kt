@@ -1,18 +1,18 @@
-package aop.fastcampus.part6.chapter01.screen.main
+package aop.fastcampus.part6.chapter01.screen.home
 
 import aop.fastcampus.part6.chapter01.data.entity.locaion.MapSearchInfoEntity
 import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantFoodEntity
 
-sealed class MainState {
+sealed class HomeState {
 
-    object Uninitialized: MainState()
+    object Uninitialized: HomeState()
 
-    object Loading: MainState()
+    object Loading: HomeState()
 
     data class Success(
         val mapSearchInfoEntity: MapSearchInfoEntity,
         val isLocationSame: Boolean,
         val foodMenuListInBasket: List<RestaurantFoodEntity>? = null
-    ): MainState()
+    ): HomeState()
 
 }

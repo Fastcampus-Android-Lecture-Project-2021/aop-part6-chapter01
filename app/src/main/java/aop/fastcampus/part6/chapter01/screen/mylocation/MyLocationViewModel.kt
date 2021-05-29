@@ -7,7 +7,6 @@ import aop.fastcampus.part6.chapter01.data.entity.locaion.MapSearchInfoEntity
 import aop.fastcampus.part6.chapter01.data.repository.map.MapRepository
 import aop.fastcampus.part6.chapter01.data.repository.user.UserRepository
 import aop.fastcampus.part6.chapter01.screen.base.BaseViewModel
-import aop.fastcampus.part6.chapter01.screen.main.MainViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 

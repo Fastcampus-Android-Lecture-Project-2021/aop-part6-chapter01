@@ -2,7 +2,7 @@ package aop.fastcampus.part6.chapter01.data.entity.restaurant
 
 import android.os.Parcelable
 import aop.fastcampus.part6.chapter01.data.entity.Entity
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantCategory
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantCategory
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

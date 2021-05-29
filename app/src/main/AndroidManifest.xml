@@ -24,7 +24,7 @@
         </activity>
         <activity android:name=".screen.mylocation.MyLocationActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".screen.main.restaurant.detail.RestaurantDetailActivity"
+        <activity android:name=".screen.home.restaurant.detail.RestaurantDetailActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".screen.order.OrderMenuActivity"
             android:screenOrientation="portrait"/>

@@ -1,4 +1,4 @@
-package aop.fastcampus.part6.chapter01.screen.main.restaurant.detail.menu
+package aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.menu
 
 import android.os.Bundle
 import android.widget.Toast
@@ -6,7 +6,7 @@ import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantFoodEntit
 import aop.fastcampus.part6.chapter01.databinding.FragmentListBinding
 import aop.fastcampus.part6.chapter01.model.restaurant.FoodModel
 import aop.fastcampus.part6.chapter01.screen.base.BaseFragment
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.detail.RestaurantDetailViewModel
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.RestaurantDetailViewModel
 import aop.fastcampus.part6.chapter01.widget.adapter.ModelRecyclerAdapter
 import aop.fastcampus.part6.chapter01.widget.adapter.listener.restaurant.FoodMenuListListener
 import org.koin.android.viewmodel.ext.android.sharedViewModel

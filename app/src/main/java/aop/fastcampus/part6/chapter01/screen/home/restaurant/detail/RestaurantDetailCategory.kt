@@ -1,4 +1,4 @@
-package aop.fastcampus.part6.chapter01.screen.main.restaurant.detail
+package aop.fastcampus.part6.chapter01.screen.home.restaurant.detail
 
 import androidx.annotation.StringRes
 import aop.fastcampus.part6.chapter01.R

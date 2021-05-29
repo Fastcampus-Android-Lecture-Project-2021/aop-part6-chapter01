@@ -3,7 +3,7 @@ package aop.fastcampus.part6.chapter01.data.repository.restaurant
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
 import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantEntity
 import aop.fastcampus.part6.chapter01.data.network.MapApiService
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantCategory
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantCategory
 import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

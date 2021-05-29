@@ -1,8 +1,7 @@
-package aop.fastcampus.part6.chapter01.screen.main.restaurant.detail
+package aop.fastcampus.part6.chapter01.screen.home.restaurant.detail
 
 import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantEntity
 import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantFoodEntity
-import aop.fastcampus.part6.chapter01.model.restaurant.FoodModel
 
 sealed class RestaurantDetailState {
 

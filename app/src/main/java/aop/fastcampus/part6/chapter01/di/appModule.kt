@@ -12,11 +12,11 @@ import aop.fastcampus.part6.chapter01.data.repository.restaurant.food.DefaultRes
 import aop.fastcampus.part6.chapter01.data.repository.restaurant.food.RestaurantFoodRepository
 import aop.fastcampus.part6.chapter01.data.repository.user.DefaultUserRepository
 import aop.fastcampus.part6.chapter01.data.repository.user.UserRepository
-import aop.fastcampus.part6.chapter01.screen.main.MainViewModel
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantCategory
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantListViewModel
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.detail.RestaurantDetailViewModel
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.detail.menu.RestaurantMenuListViewModel
+import aop.fastcampus.part6.chapter01.screen.home.HomeViewModel
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantCategory
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantListViewModel
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.RestaurantDetailViewModel
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.menu.RestaurantMenuListViewModel
 import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationViewModel
 import aop.fastcampus.part6.chapter01.screen.order.OrderMenuViewModel
 import aop.fastcampus.part6.chapter01.util.provider.DefaultResourcesProvider
@@ -29,7 +29,7 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    viewModel { MainViewModel(get(), get(), get()) }
+    viewModel { HomeViewModel(get(), get(), get()) }
 
     factory { (restaurantCategory: RestaurantCategory, locationLatLngEntity: LocationLatLngEntity) ->
         RestaurantListViewModel(restaurantCategory, locationLatLngEntity, get())

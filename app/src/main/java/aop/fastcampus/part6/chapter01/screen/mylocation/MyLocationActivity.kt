@@ -12,7 +12,7 @@ import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
 import aop.fastcampus.part6.chapter01.data.entity.locaion.MapSearchInfoEntity
 import aop.fastcampus.part6.chapter01.databinding.ActivityMyLocationBinding
 import aop.fastcampus.part6.chapter01.screen.base.BaseActivity
-import aop.fastcampus.part6.chapter01.screen.main.MainViewModel
+import aop.fastcampus.part6.chapter01.screen.home.HomeViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -25,7 +25,7 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
 
     override val viewModel by viewModel<MyLocationViewModel> {
         parametersOf(
-            intent.getParcelableExtra<MapSearchInfoEntity>(MainViewModel.MY_LOCATION_KEY)
+            intent.getParcelableExtra<MapSearchInfoEntity>(HomeViewModel.MY_LOCATION_KEY)
         )
     }
 
@@ -36,7 +36,7 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
 
         fun newIntent(context: Context, mapSearchInfoEntity: MapSearchInfoEntity) =
             Intent(context, MyLocationActivity::class.java).apply {
-                putExtra(MainViewModel.MY_LOCATION_KEY, mapSearchInfoEntity)
+                putExtra(HomeViewModel.MY_LOCATION_KEY, mapSearchInfoEntity)
             }
 
     }
@@ -79,7 +79,7 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
                 }
                 is MyLocationState.Confirm -> {
                     setResult(Activity.RESULT_OK, Intent().apply {
-                        putExtra(MainViewModel.MY_LOCATION_KEY, it.mapSearchInfoEntity)
+                        putExtra(HomeViewModel.MY_LOCATION_KEY, it.mapSearchInfoEntity)
                     })
                     finish()
                 }

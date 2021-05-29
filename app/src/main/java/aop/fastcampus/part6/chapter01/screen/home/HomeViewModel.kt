@@ -1,4 +1,4 @@
-package aop.fastcampus.part6.chapter01.screen.main
+package aop.fastcampus.part6.chapter01.screen.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,7 +11,7 @@ import aop.fastcampus.part6.chapter01.data.repository.user.UserRepository
 import aop.fastcampus.part6.chapter01.screen.base.BaseViewModel
 import kotlinx.coroutines.launch
 
-class MainViewModel(
+class HomeViewModel(
     private val mapRepository: MapRepository,
     private val userRepository: UserRepository,
     private val restaurantFoodRepository: RestaurantFoodRepository
@@ -21,20 +21,20 @@ class MainViewModel(
         const val MY_LOCATION_KEY = "MyLocation"
     }
 
-    val mainStateLiveData = MutableLiveData<MainState>(MainState.Uninitialized)
+    val mainStateLiveData = MutableLiveData<HomeState>(HomeState.Uninitialized)
 
     val foodMenuBasketLiveData = MutableLiveData<List<RestaurantFoodEntity>>()
 
     fun loadReverseGeoInformation(
         locationLatLngEntity: LocationLatLngEntity
     ) = viewModelScope.launch {
-        mainStateLiveData.value = MainState.Loading
+        mainStateLiveData.value = HomeState.Loading
         val userLocation = userRepository.getUserLocation()
         val currentLocation = userLocation ?: locationLatLngEntity
 
         val addressInfo = mapRepository.getReverseGeoInformation(currentLocation)
         addressInfo?.let { info ->
-            mainStateLiveData.value = MainState.Success(
+            mainStateLiveData.value = HomeState.Success(
                 MapSearchInfoEntity(
                     fullAdress = info.fullAddress ?: "주소 정보 없음",
                     name = info.buildingName ?: "빌딩정보 없음",
@@ -49,7 +49,7 @@ class MainViewModel(
 
     fun getMapSearchInfo(): MapSearchInfoEntity? {
         when (val data = mainStateLiveData.value) {
-            is MainState.Success -> {
+            is HomeState.Success -> {
                 return data.mapSearchInfoEntity
             }
         }

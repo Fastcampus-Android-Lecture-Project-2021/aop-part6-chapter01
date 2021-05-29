@@ -1,4 +1,4 @@
-package aop.fastcampus.part6.chapter01.screen.main.restaurant.detail
+package aop.fastcampus.part6.chapter01.screen.home.restaurant.detail
 
 import android.app.AlertDialog
 import android.content.Context
@@ -12,9 +12,8 @@ import aop.fastcampus.part6.chapter01.databinding.ActivityRestaurantDetailBindin
 import aop.fastcampus.part6.chapter01.extensions.fromDpToPx
 import aop.fastcampus.part6.chapter01.extensions.load
 import aop.fastcampus.part6.chapter01.screen.base.BaseActivity
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantListFragment
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantListViewModel
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.detail.menu.RestaurantMenuListFragment
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantListFragment
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.menu.RestaurantMenuListFragment
 import aop.fastcampus.part6.chapter01.widget.adapter.RestaurantDetailListFragmentPagerAdapter
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator

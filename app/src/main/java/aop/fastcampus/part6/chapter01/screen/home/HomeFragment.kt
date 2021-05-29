@@ -1,4 +1,4 @@
-package aop.fastcampus.part6.chapter01.screen.main
+package aop.fastcampus.part6.chapter01.screen.home
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -14,19 +14,19 @@ import androidx.core.view.isVisible
 import aop.fastcampus.part6.chapter01.R
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
 import aop.fastcampus.part6.chapter01.data.entity.locaion.MapSearchInfoEntity
-import aop.fastcampus.part6.chapter01.databinding.FragmentMainBinding
+import aop.fastcampus.part6.chapter01.databinding.FragmentHomeBinding
 import aop.fastcampus.part6.chapter01.screen.base.BaseFragment
-import aop.fastcampus.part6.chapter01.screen.main.MainViewModel.Companion.MY_LOCATION_KEY
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantCategory
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantListFragment
-import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestautantFilterOrder
+import aop.fastcampus.part6.chapter01.screen.home.HomeViewModel.Companion.MY_LOCATION_KEY
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantCategory
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantListFragment
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestautantFilterOrder
 import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationActivity
 import aop.fastcampus.part6.chapter01.screen.order.OrderMenuActivity
 import aop.fastcampus.part6.chapter01.widget.adapter.RestaurantListFragmentPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
+class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     companion object {
 
@@ -38,9 +38,9 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
         const val TAG = "MainFragment"
     }
 
-    override fun getViewBinding(): FragmentMainBinding = FragmentMainBinding.inflate(layoutInflater)
+    override fun getViewBinding(): FragmentHomeBinding = FragmentHomeBinding.inflate(layoutInflater)
 
-    override val viewModel by viewModel<MainViewModel>()
+    override val viewModel by viewModel<HomeViewModel>()
 
     private lateinit var locationManager: LocationManager
 
@@ -148,14 +148,14 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
     override fun observeData() {
         viewModel.mainStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is MainState.Uninitialized -> {
+                is HomeState.Uninitialized -> {
                     getMyLocation()
                 }
-                is MainState.Loading -> {
+                is HomeState.Loading -> {
                     binding.locationLoading.isVisible = true
                     binding.locationTitleTextView.text = getString(R.string.loading)
                 }
-                is MainState.Success -> {
+                is HomeState.Success -> {
                     binding.locationLoading.isGone = true
                     binding.locationTitleTextView.text = it.mapSearchInfoEntity.fullAdress
                     initViewPager(it.mapSearchInfoEntity.locationLatLng)
@@ -194,7 +194,7 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
                 RestaurantListFragment.newInstance(it, locationLatLng)
             }
             viewPagerAdapter = RestaurantListFragmentPagerAdapter(
-                this@MainFragment,
+                this@HomeFragment,
                 restaurantListFragmentList,
                 locationLatLng
             )

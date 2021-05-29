@@ -1,4 +1,4 @@
-package aop.fastcampus.part6.chapter01.screen.main.restaurant.detail.menu
+package aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.menu
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope

@@ -1,4 +1,4 @@
-package aop.fastcampus.part6.chapter01.screen.main.restaurant
+package aop.fastcampus.part6.chapter01.screen.home.restaurant
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

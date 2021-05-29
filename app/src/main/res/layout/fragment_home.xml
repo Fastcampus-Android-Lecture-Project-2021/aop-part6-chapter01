@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screen.main.MainFragment">
+    tools:context=".screen.home.HomeFragment">
 
     <androidx.appcompat.widget.Toolbar
-        style="?attr/toolbarWithArrowButtonStyle"
+        style="?attr/toolbarStyle"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
