@@ -14,17 +14,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Aoppart6chapter01">
-        <activity android:name=".screen.MainActivity">
+        <activity android:name=".screen.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".screen.mylocation.MyLocationActivity" />
-
-        <activity android:name=".screen.main.restaurant.detail.RestaurantDetailActivity" />
+        <activity android:name=".screen.mylocation.MyLocationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen.main.restaurant.detail.RestaurantDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen.order.OrderMenuActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

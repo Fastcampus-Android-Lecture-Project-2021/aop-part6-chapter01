@@ -21,6 +21,7 @@ import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantCategory
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantListFragment
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestautantFilterOrder
 import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationActivity
+import aop.fastcampus.part6.chapter01.screen.order.OrderMenuActivity
 import aop.fastcampus.part6.chapter01.widget.adapter.RestaurantListFragmentPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -169,7 +170,9 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
                 binding.basketButtonContainer.isVisible = true
                 binding.basketCountTextView.text = getString(R.string.basket_count, it.size)
                 binding.basketButton.setOnClickListener {
-
+                    startActivity(
+                        OrderMenuActivity.newIntent(requireActivity())
+                    )
                 }
             } else {
                 binding.basketButtonContainer.isGone = true
