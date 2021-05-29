@@ -18,6 +18,7 @@ import aop.fastcampus.part6.chapter01.screen.main.restaurant.RestaurantListViewM
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.detail.RestaurantDetailViewModel
 import aop.fastcampus.part6.chapter01.screen.main.restaurant.detail.menu.RestaurantMenuListViewModel
 import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationViewModel
+import aop.fastcampus.part6.chapter01.screen.order.OrderMenuViewModel
 import aop.fastcampus.part6.chapter01.util.provider.DefaultResourcesProvider
 import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
 import kotlinx.coroutines.Dispatchers
@@ -43,6 +44,8 @@ val appModule = module {
     viewModel { (restaurantId: Long, restaurantFoodList: List<RestaurantFoodEntity>) ->
         RestaurantMenuListViewModel(restaurantId, restaurantFoodList, get())
     }
+
+    viewModel { OrderMenuViewModel() }
 
     single<MapRepository> { DefaultMapRepository(get(), get()) }
     single<RestaurantRepository> { DefaultRestaurantRepository(get(), get(), get()) }
