@@ -188,8 +188,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     private fun initViewPager(locationLatLng: LocationLatLngEntity) = with(binding) {
         filterChipGroup.isVisible = true
-        val restaurantCategories = RestaurantCategory.values()
         if (::viewPagerAdapter.isInitialized.not()) {
+            val restaurantCategories = RestaurantCategory.values()
             val restaurantListFragmentList = restaurantCategories.map {
                 RestaurantListFragment.newInstance(it, locationLatLng)
             }
@@ -199,16 +199,16 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 locationLatLng
             )
             viewPager.adapter = viewPagerAdapter
+            viewPager.offscreenPageLimit = restaurantCategories.size
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                tab.setText(RestaurantCategory.values()[position].categoryNameId)
+            }.attach()
         }
         if (locationLatLng != viewPagerAdapter.locationLatLng) {
             viewPagerAdapter.fragmentList.forEach {
                 it.viewModel.setLocationLatLng(locationLatLng)
             }
         }
-        viewPager.offscreenPageLimit = restaurantCategories.size
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.setText(RestaurantCategory.values()[position].categoryNameId)
-        }.attach()
     }
 
     private fun removeLocationListener() {
