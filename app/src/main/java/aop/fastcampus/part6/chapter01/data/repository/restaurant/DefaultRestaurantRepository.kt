@@ -54,7 +54,7 @@ class DefaultRestaurantRepository(
             listOf(
                 RestaurantEntity(
                     id = 0,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.ALL,
                     restaurantTitle = "마포화로집",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -65,7 +65,7 @@ class DefaultRestaurantRepository(
                 ),
                 RestaurantEntity(
                     id = 1,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.ALL,
                     restaurantTitle = "옛날우동&덮밥",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -76,7 +76,7 @@ class DefaultRestaurantRepository(
                 ),
                 RestaurantEntity(
                     id = 2,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.ALL,
                     restaurantTitle = "마스터석쇠불고기&냉면plus",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -87,7 +87,7 @@ class DefaultRestaurantRepository(
                 ),
                 RestaurantEntity(
                     id = 3,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.ALL,
                     restaurantTitle = "마스터통삼겹",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -98,7 +98,7 @@ class DefaultRestaurantRepository(
                 ),
                 RestaurantEntity(
                     id = 4,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.ALL,
                     restaurantTitle = "창영이 족발&보쌈",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -109,7 +109,7 @@ class DefaultRestaurantRepository(
                 ),
                 RestaurantEntity(
                     id = 5,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.ALL,
                     restaurantTitle = "콩나물국밥&코다리조림 콩심 인천논현점",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -120,7 +120,7 @@ class DefaultRestaurantRepository(
                 ),
                 RestaurantEntity(
                     id = 6,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.ALL,
                     restaurantTitle = "김여사 칼국수&냉면 논현점",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -131,7 +131,7 @@ class DefaultRestaurantRepository(
                 ),
                 RestaurantEntity(
                     id = 7,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.ALL,
                     restaurantTitle = "돈키호테",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -146,7 +146,7 @@ class DefaultRestaurantRepository(
             listOf(
                 RestaurantEntity(
                     id = 0,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.KOREAN_FOOD,
                     restaurantTitle = "마포화로집",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -157,7 +157,7 @@ class DefaultRestaurantRepository(
                 ),
                 RestaurantEntity(
                     id = 1,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.KOREAN_FOOD,
                     restaurantTitle = "옛날우동&덮밥",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -168,7 +168,7 @@ class DefaultRestaurantRepository(
                 ),
                 RestaurantEntity(
                     id = 2,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.KOREAN_FOOD,
                     restaurantTitle = "마스터석쇠불고기&냉면plus",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -179,7 +179,7 @@ class DefaultRestaurantRepository(
                 ),
                 RestaurantEntity(
                     id = 3,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.KOREAN_FOOD,
                     restaurantTitle = "마스터통삼겹",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -190,7 +190,7 @@ class DefaultRestaurantRepository(
                 ),
                 RestaurantEntity(
                     id = 4,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.KOREAN_FOOD,
                     restaurantTitle = "창영이 족발&보쌈",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
@@ -201,7 +201,7 @@ class DefaultRestaurantRepository(
                 ),
                 RestaurantEntity(
                     id = 5,
-                    restaurantCategorys = listOf(RestaurantCategory.ALL, RestaurantCategory.KOREAN_FOOD),
+                    restaurantCategory = RestaurantCategory.KOREAN_FOOD,
                     restaurantTitle = "콩나물국밥&코다리조림 콩심 인천논현점",
                     restaurantImageUrl = "https://picsum.photos/200",
                     grade = (1 until 5).random() + ((0..10).random() / 10f),
