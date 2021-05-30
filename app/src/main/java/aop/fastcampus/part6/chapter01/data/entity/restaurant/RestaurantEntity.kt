@@ -14,7 +14,6 @@ data class RestaurantEntity(
     val restaurantImageUrl: String,
     val grade: Float,
     val reviewCount: Int,
-    val keywords: List<String>,
     val deliveryTimeRange: Pair<Int, Int>,
     val deliveryTipRange: Pair<Int, Int>
 ): Entity, Parcelable

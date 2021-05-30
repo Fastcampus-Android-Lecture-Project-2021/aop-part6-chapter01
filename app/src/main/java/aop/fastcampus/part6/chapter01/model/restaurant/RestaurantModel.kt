@@ -14,7 +14,6 @@ data class RestaurantModel(
     val restaurantImageUrl: String,
     val grade: Float,
     val reviewCount: Int,
-    val keywords: List<String>,
     val deliveryTimeRange: Pair<Int, Int>,
     val deliveryTipRange: Pair<Int, Int>
 ) : Model(id, type) {
@@ -27,7 +26,6 @@ data class RestaurantModel(
         restaurantImageUrl,
         grade,
         reviewCount,
-        keywords,
         deliveryTimeRange,
         deliveryTipRange
     )

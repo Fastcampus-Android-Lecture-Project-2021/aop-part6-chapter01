@@ -46,7 +46,6 @@ class RestaurantListViewModel(
                 restaurantImageUrl = it.restaurantImageUrl,
                 grade = it.grade,
                 reviewCount = it.reviewCount,
-                keywords = it.keywords,
                 deliveryTimeRange = it.deliveryTimeRange,
                 deliveryTipRange = it.deliveryTipRange
             )
