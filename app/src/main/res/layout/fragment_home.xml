@@ -120,6 +120,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/top_rate"
+                app:chipIcon="@drawable/ic_star"
+                app:chipIconEnabled="true"
                 app:chipIconTint="@color/icon_filter_chip_state_list_reset" />
 
         </com.google.android.material.chip.ChipGroup>
