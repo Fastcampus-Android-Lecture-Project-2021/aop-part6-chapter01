@@ -8,7 +8,7 @@ import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantListFragm
 class RestaurantListFragmentPagerAdapter(
     fragment: Fragment,
     val fragmentList: List<RestaurantListFragment>,
-    val locationLatLng: LocationLatLngEntity
+    var locationLatLng: LocationLatLngEntity
 ) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int = fragmentList.size

@@ -208,6 +208,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             }.attach()
         }
         if (locationLatLng != viewPagerAdapter.locationLatLng) {
+            viewPagerAdapter.locationLatLng = locationLatLng
             viewPagerAdapter.fragmentList.forEach {
                 it.viewModel.setLocationLatLng(locationLatLng)
             }
