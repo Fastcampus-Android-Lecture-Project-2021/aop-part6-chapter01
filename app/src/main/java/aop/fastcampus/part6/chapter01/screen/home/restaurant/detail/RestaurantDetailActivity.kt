@@ -3,6 +3,7 @@ package aop.fastcampus.part6.chapter01.screen.home.restaurant.detail
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import aop.fastcampus.part6.chapter01.R
@@ -61,6 +62,30 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
         toolbar.setNavigationOnClickListener {
             finish()
         }
+        callButton.setOnClickListener {
+            viewModel.getRestaurantPhoneNumber()?.let { telNumber ->
+                val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$telNumber"))
+                startActivity(intent)
+            }
+        }
+        likeButton.setOnClickListener {
+
+        }
+        shareButton.setOnClickListener {
+            viewModel.getRestaurantInfo()?.let { restaurantInfo ->
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        """
+                      
+                      
+                            """
+                    )
+                    Intent.createChooser(this, "친구에게 공유하기")
+                }
+                startActivity(intent)
+            }
+        }
     }
 
     override fun observeData() = viewModel.restaurantDetailStateLiveData.observe(this) {
@@ -85,6 +110,9 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
         progressBar.isGone = true
 
         val restaurantEntity = state.restaurantEntity
+
+        callButton.isGone = restaurantEntity.restaurantTelNumber == null
+
         restaurantTitleTextView.text = restaurantEntity.restaurantTitle
         restaurantImage.load(restaurantEntity.restaurantImageUrl)
         restaurantMainTitleTextView.text = restaurantEntity.restaurantTitle

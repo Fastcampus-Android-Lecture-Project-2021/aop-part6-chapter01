@@ -84,7 +84,8 @@
                 app:chipIconEnabled="true"
                 app:chipIcon="@drawable/ic_refresh"
                 app:chipIconTint="@color/icon_filter_chip_state_list_reset"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                tools:visibility="visible"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipFastDelivery"
