@@ -5,13 +5,15 @@ import androidx.lifecycle.viewModelScope
 import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantEntity
 import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantFoodEntity
 import aop.fastcampus.part6.chapter01.data.repository.restaurant.food.RestaurantFoodRepository
+import aop.fastcampus.part6.chapter01.data.repository.user.UserRepository
 import aop.fastcampus.part6.chapter01.screen.base.BaseViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class RestaurantDetailViewModel(
     private val restaurantEntity: RestaurantEntity,
-    private val restaurantFoodRepository: RestaurantFoodRepository
+    private val restaurantFoodRepository: RestaurantFoodRepository,
+    private val userRepository: UserRepository
 ) : BaseViewModel() {
 
     val restaurantDetailStateLiveData = MutableLiveData<RestaurantDetailState>(RestaurantDetailState.Uninitialized)
@@ -23,11 +25,32 @@ class RestaurantDetailViewModel(
         restaurantDetailStateLiveData.value = RestaurantDetailState.Loading
         val foods = restaurantFoodRepository.getFoods(restaurantEntity.restaurantInfoId)
         val foodMenuListInBasket = restaurantFoodRepository.getAllFoodMenuListInBasket()
+        val isLiked = userRepository.getUserLikedRestaurant(restaurantEntity.restaurantTitle) != null
         restaurantDetailStateLiveData.value = RestaurantDetailState.Success(
             restaurantEntity = restaurantEntity,
             restaurantFoodList = foods,
-            foodMenuListInBasket = foodMenuListInBasket
+            foodMenuListInBasket = foodMenuListInBasket,
+            isLiked = isLiked
         )
+    }
+
+    fun toggleLikedRestaurant() = viewModelScope.launch {
+        when (val data = restaurantDetailStateLiveData.value) {
+            is RestaurantDetailState.Success -> {
+                userRepository.getUserLikedRestaurant(restaurantEntity.restaurantTitle)?.let {
+                    userRepository.deleteUserLikedRestaurant(it.restaurantTitle)
+                    restaurantDetailStateLiveData.value = data.copy(
+                        isLiked = false
+                    )
+                } ?: kotlin.run {
+                    userRepository.insertUserLikedRestaurant(restaurantEntity)
+                    restaurantDetailStateLiveData.value = data.copy(
+                        isLiked = true
+                    )
+                }
+            }
+            else -> Unit
+        }
     }
 
     fun notifyClearBasket() = viewModelScope.launch {

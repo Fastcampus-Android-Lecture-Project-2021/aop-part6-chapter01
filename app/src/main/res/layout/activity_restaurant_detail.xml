@@ -175,18 +175,39 @@
                                 android:text="@string/call"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
+                                android:background="@null"
                                 android:visibility="gone"
                                 tools:visibility="visible"/>
-                            <Button
-                                android:id="@+id/likeButton"
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:background="@null"
-                                android:backgroundTint="@color/white"
-                                android:text="@string/like"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"/>
+                                android:layout_weight="1">
+                                <Button
+                                    android:id="@+id/likeButton"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:backgroundTint="@color/white"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp"
+                                    android:background="@null" />
+                                <TextView
+                                    android:id="@+id/likeText"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/white"
+                                    android:text="@string/like"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    tools:drawableStartCompat="@drawable/ic_heart_enable"
+                                    android:elevation="16dp"
+                                    android:drawablePadding="8dp"
+                                    android:clickable="false"/>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
                             <Button
                                 android:id="@+id/shareButton"
                                 android:layout_width="0dp"

@@ -39,7 +39,7 @@ val appModule = module {
         MyLocationViewModel(mapSearchInfoEntity, get(), get())
     }
 
-    viewModel { (restaurantEntity: RestaurantEntity) -> RestaurantDetailViewModel(restaurantEntity, get()) }
+    viewModel { (restaurantEntity: RestaurantEntity) -> RestaurantDetailViewModel(restaurantEntity, get(), get()) }
 
     viewModel { (restaurantId: Long, restaurantFoodList: List<RestaurantFoodEntity>) ->
         RestaurantMenuListViewModel(restaurantId, restaurantFoodList, get())
@@ -49,7 +49,7 @@ val appModule = module {
 
     single<MapRepository> { DefaultMapRepository(get(), get()) }
     single<RestaurantRepository> { DefaultRestaurantRepository(get(), get(), get()) }
-    single<UserRepository> { DefaultUserRepository(get(), get()) }
+    single<UserRepository> { DefaultUserRepository(get(), get(), get()) }
     single<RestaurantFoodRepository> { DefaultRestaurantFoodRepository(get(), get(), get()) }
 
     single { provideGsonConverterFactory() }
@@ -64,6 +64,7 @@ val appModule = module {
     single { provideDB(androidApplication()) }
     single { provideLocationDao(get()) }
     single { provideFoodMenuBasketDao(get()) }
+    single { provideRestaurantDao(get()) }
 
     single<ResourcesProvider> { DefaultResourcesProvider(androidApplication()) }
 

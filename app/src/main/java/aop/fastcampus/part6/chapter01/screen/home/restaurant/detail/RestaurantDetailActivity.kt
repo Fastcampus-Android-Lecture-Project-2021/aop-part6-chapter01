@@ -5,6 +5,7 @@ import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import aop.fastcampus.part6.chapter01.R
@@ -70,7 +71,7 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
             }
         }
         likeButton.setOnClickListener {
-
+            viewModel.toggleLikedRestaurant()
         }
         shareButton.setOnClickListener {
             viewModel.getRestaurantInfo()?.let { restaurantInfo ->
@@ -120,6 +121,15 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
             getString(R.string.delivery_expected_time, restaurantEntity.deliveryTimeRange.first, restaurantEntity.deliveryTimeRange.second)
         deliveryTipText.text =
             getString(R.string.delivery_tip_range, restaurantEntity.deliveryTipRange.first, restaurantEntity.deliveryTipRange.second)
+
+        likeText.setCompoundDrawablesWithIntrinsicBounds(
+            ContextCompat.getDrawable(this@RestaurantDetailActivity, if (state.isLiked == true) {
+                R.drawable.ic_heart_enable
+            } else {
+                R.drawable.ic_heart_disable
+            }),
+            null, null, null
+        )
 
         if (::viewPagerAdapter.isInitialized.not()) {
             initViewPager(state.restaurantEntity.restaurantInfoId, state.restaurantFoodList)
