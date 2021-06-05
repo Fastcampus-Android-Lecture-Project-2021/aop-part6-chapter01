@@ -67,12 +67,12 @@ class RestaurantDetailViewModel(
     }
 
     fun getRestaurantInfo(): RestaurantEntity? {
-        when (val data = restaurantDetailStateLiveData.value) {
+        return when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {
                 data.restaurantEntity
             }
+            else -> null
         }
-        return null
     }
 
     fun getRestaurantPhoneNumber(): String? {
