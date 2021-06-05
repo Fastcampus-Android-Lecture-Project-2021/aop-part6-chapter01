@@ -146,7 +146,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     override fun observeData() {
-        viewModel.mainStateLiveData.observe(viewLifecycleOwner) {
+        viewModel.homeStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is HomeState.Uninitialized -> {
                     getMyLocation()
@@ -157,11 +157,14 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 }
                 is HomeState.Success -> {
                     binding.locationLoading.isGone = true
-                    binding.locationTitleTextView.text = it.mapSearchInfoEntity.fullAdress
+                    binding.locationTitleTextView.text = it.mapSearchInfoEntity.fullAddress
                     initViewPager(it.mapSearchInfoEntity.locationLatLng)
                     if (it.isLocationSame.not()) {
                         Toast.makeText(requireContext(), "위치가 맞는지 확인해주세요!", Toast.LENGTH_SHORT).show()
                     }
+                }
+                is HomeState.Error -> {
+                    Toast.makeText(requireContext(), it.messageId, Toast.LENGTH_SHORT).show()
                 }
             }
         }

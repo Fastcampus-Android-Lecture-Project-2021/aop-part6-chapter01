@@ -96,7 +96,7 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
     private fun handleSuccessState(state: MyLocationState.Success) = with(binding) {
         val mapSearchInfo = state.mapSearchInfoEntity
         locationLoading.isGone = true
-        locationTitleTextView.text = mapSearchInfo.fullAdress
+        locationTitleTextView.text = mapSearchInfo.fullAddress
         if (isMapInitialized.not()) {
             map.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(

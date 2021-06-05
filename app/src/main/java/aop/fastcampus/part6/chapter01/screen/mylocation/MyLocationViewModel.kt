@@ -32,7 +32,7 @@ class MyLocationViewModel(
         addressInfo?.let { info ->
             myLocationStateLiveData.value = MyLocationState.Success(
                 MapSearchInfoEntity(
-                    fullAdress = info.fullAddress ?: "주소 정보 없음",
+                    fullAddress = info.fullAddress ?: "주소 정보 없음",
                     name = info.buildingName ?: "빌딩정보 없음",
                     locationLatLng = locationLatLngEntity
                 )

@@ -21,6 +21,9 @@
     <string name="basket_count">+%d</string>
 
     <string name="can_not_assigned_permission">권한을 받지 못했습니다.</string>
+
+    <string name="can_not_load_address_info">위치 정보를 불러올 수 없습니다.</string>
+
     <string name="initialize">초기화</string>
     <string name="fast_delivery">배달 빠른 순</string>
     <string name="low_delivery_tip">배달팁 낮은 순</string>
