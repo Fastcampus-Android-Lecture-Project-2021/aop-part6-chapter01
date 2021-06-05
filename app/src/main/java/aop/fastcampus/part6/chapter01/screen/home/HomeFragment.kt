@@ -85,7 +85,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 )
             }
         }
-        filterChipGroup.setOnCheckedChangeListener { _, checkedId ->
+        orderChipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.chipDefault -> {
                     chipInitialize.isGone = true
@@ -190,7 +190,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun initViewPager(locationLatLng: LocationLatLngEntity) = with(binding) {
-        filterChipGroup.isVisible = true
+        orderChipGroup.isVisible = true
         if (::viewPagerAdapter.isInitialized.not()) {
             val restaurantCategories = RestaurantCategory.values()
             val restaurantListFragmentList = restaurantCategories.map {
