@@ -35,4 +35,8 @@ class DefaultUserRepository(
         restaurantDao.delete(restaurantTitle)
     }
 
+    override suspend fun deleteALlUserLikedRestaurant() {
+        restaurantDao.deleteAll()
+    }
+
 }

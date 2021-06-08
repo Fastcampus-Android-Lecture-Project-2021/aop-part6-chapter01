@@ -15,4 +15,7 @@ interface RestaurantDao {
     @Query("DELETE FROM RestaurantEntity WHERE restaurantTitle=:title")
     suspend fun delete(title: String)
 
+    @Query("DELETE FROM RestaurantEntity")
+    suspend fun deleteAll()
+
 }

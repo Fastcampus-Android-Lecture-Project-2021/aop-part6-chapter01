@@ -3,6 +3,7 @@ package aop.fastcampus.part6.chapter01.screen.home
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.location.Location
 import android.location.LocationListener
@@ -15,6 +16,8 @@ import aop.fastcampus.part6.chapter01.R
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
 import aop.fastcampus.part6.chapter01.data.entity.locaion.MapSearchInfoEntity
 import aop.fastcampus.part6.chapter01.databinding.FragmentHomeBinding
+import aop.fastcampus.part6.chapter01.screen.MainActivity
+import aop.fastcampus.part6.chapter01.screen.MainTabMenu
 import aop.fastcampus.part6.chapter01.screen.base.BaseFragment
 import aop.fastcampus.part6.chapter01.screen.home.HomeViewModel.Companion.MY_LOCATION_KEY
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantCategory
@@ -24,6 +27,7 @@ import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationActivity
 import aop.fastcampus.part6.chapter01.screen.order.OrderMenuActivity
 import aop.fastcampus.part6.chapter01.widget.adapter.RestaurantListFragmentPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
@@ -36,6 +40,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         )
 
         const val TAG = "MainFragment"
+
+        fun newInstance() = HomeFragment()
     }
 
     override fun getViewBinding(): FragmentHomeBinding = FragmentHomeBinding.inflate(layoutInflater)
@@ -47,6 +53,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private lateinit var myLocationListener: MyLocationListener
 
     private lateinit var viewPagerAdapter: RestaurantListFragmentPagerAdapter
+
+    private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     private val changeLocationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
@@ -110,6 +118,21 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
+    private fun alertLoginNeed(afterAction: () -> Unit) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("로그인이 필요합니다.")
+            .setMessage("주문하려면 로그인이 필요합니다. My탭으로 이동하시겠습니까?")
+            .setPositiveButton("이동") { dialog, _ ->
+                afterAction()
+                dialog.dismiss()
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
     private fun changeRestaurantFilterOrder(order: RestautantFilterOrder) {
         viewPagerAdapter.fragmentList.forEach {
             it.viewModel.setRestaurantFilterOrder(order)
@@ -166,6 +189,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 is HomeState.Error -> {
                     Toast.makeText(requireContext(), it.messageId, Toast.LENGTH_SHORT).show()
                 }
+                else -> Unit
             }
         }
         viewModel.foodMenuBasketLiveData.observe(viewLifecycleOwner) {
@@ -173,9 +197,15 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 binding.basketButtonContainer.isVisible = true
                 binding.basketCountTextView.text = getString(R.string.basket_count, it.size)
                 binding.basketButton.setOnClickListener {
-                    startActivity(
-                        OrderMenuActivity.newIntent(requireActivity())
-                    )
+                    if (firebaseAuth.currentUser == null) {
+                        alertLoginNeed {
+                            (requireActivity() as MainActivity).goToTab(MainTabMenu.MY)
+                        }
+                    } else {
+                        startActivity(
+                            OrderMenuActivity.newIntent(requireActivity())
+                        )
+                    }
                 }
             } else {
                 binding.basketButtonContainer.isGone = true

@@ -15,4 +15,6 @@ interface UserRepository {
 
     suspend fun deleteUserLikedRestaurant(restaurantTitle: String)
 
+    suspend fun deleteALlUserLikedRestaurant()
+
 }
