@@ -12,6 +12,8 @@ interface RestaurantFoodRepository {
 
     suspend fun insertFoodMenuInBasket(restaurantFoodEntity: RestaurantFoodEntity)
 
+    suspend fun removeFoodMenuListInBasket(foodId: String)
+
     suspend fun clearFoodMenuListInBasket()
 
 }

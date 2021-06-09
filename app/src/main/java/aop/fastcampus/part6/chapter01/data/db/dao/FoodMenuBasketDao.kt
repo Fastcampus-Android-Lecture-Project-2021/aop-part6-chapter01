@@ -22,7 +22,7 @@ interface FoodMenuBasketDao {
     suspend fun insert(FoodEntity: RestaurantFoodEntity)
 
     @Query("DELETE FROM RestaurantFoodEntity WHERE id=:id")
-    suspend fun delete(id: Long)
+    suspend fun delete(id: String)
 
     @Query("DELETE FROM RestaurantFoodEntity")
     suspend fun deleteAll()

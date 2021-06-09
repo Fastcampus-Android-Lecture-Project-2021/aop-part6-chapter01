@@ -19,7 +19,7 @@ import aop.fastcampus.part6.chapter01.screen.MainTabMenu
 import aop.fastcampus.part6.chapter01.screen.base.BaseActivity
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantListFragment
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.menu.RestaurantMenuListFragment
-import aop.fastcampus.part6.chapter01.screen.order.OrderMenuActivity
+import aop.fastcampus.part6.chapter01.screen.order.OrderMenuListActivity
 import aop.fastcampus.part6.chapter01.util.event.MenuChangeEventBus
 import aop.fastcampus.part6.chapter01.widget.adapter.RestaurantDetailListFragmentPagerAdapter
 import com.google.android.material.appbar.AppBarLayout
@@ -192,7 +192,7 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
                 }
             } else {
                 startActivity(
-                    OrderMenuActivity.newIntent(this@RestaurantDetailActivity)
+                    OrderMenuListActivity.newIntent(this@RestaurantDetailActivity)
                 )
             }
         }

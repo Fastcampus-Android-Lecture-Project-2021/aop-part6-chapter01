@@ -24,7 +24,7 @@ import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantCategory
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantListFragment
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestautantFilterOrder
 import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationActivity
-import aop.fastcampus.part6.chapter01.screen.order.OrderMenuActivity
+import aop.fastcampus.part6.chapter01.screen.order.OrderMenuListActivity
 import aop.fastcampus.part6.chapter01.widget.adapter.RestaurantListFragmentPagerAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
@@ -203,7 +203,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                         }
                     } else {
                         startActivity(
-                            OrderMenuActivity.newIntent(requireActivity())
+                            OrderMenuListActivity.newIntent(requireActivity())
                         )
                     }
                 }

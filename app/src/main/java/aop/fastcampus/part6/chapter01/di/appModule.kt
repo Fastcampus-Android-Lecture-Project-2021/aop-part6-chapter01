@@ -21,7 +21,7 @@ import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.RestaurantDe
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.menu.RestaurantMenuListViewModel
 import aop.fastcampus.part6.chapter01.screen.my.MyViewModel
 import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationViewModel
-import aop.fastcampus.part6.chapter01.screen.order.OrderMenuViewModel
+import aop.fastcampus.part6.chapter01.screen.order.OrderMenuListViewModel
 import aop.fastcampus.part6.chapter01.util.event.MenuChangeEventBus
 import aop.fastcampus.part6.chapter01.util.provider.DefaultResourcesProvider
 import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
@@ -52,7 +52,7 @@ val appModule = module {
         RestaurantMenuListViewModel(restaurantId, restaurantFoodList, get())
     }
 
-    viewModel { OrderMenuViewModel() }
+    viewModel { OrderMenuListViewModel(get()) }
 
     single<MapRepository> { DefaultMapRepository(get(), get()) }
     single<RestaurantRepository> { DefaultRestaurantRepository(get(), get(), get()) }

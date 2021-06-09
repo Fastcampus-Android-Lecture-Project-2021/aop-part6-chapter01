@@ -24,12 +24,13 @@ class RestaurantMenuListViewModel(
     override fun fetchData(): Job = viewModelScope.launch {
         restaurantMenuListLiveData.value = foodEntityList.map {
             FoodModel(
-                id = hashCode().toLong(),
+                id = it.hashCode().toLong(),
                 title = it.title,
                 description = it.description,
                 price = it.price,
                 imageUrl = it.imageUrl,
-                restaurantId = restaurantId
+                restaurantId = restaurantId,
+                foodId = it.id
             )
         }
     }

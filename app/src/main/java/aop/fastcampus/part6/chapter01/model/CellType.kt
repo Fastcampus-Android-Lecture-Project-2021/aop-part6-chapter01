@@ -4,5 +4,6 @@ enum class CellType {
 
     RESTAURANT_CELL,
     FOOD_CELL,
+    ORDER_FOOD_CELL,
 
 }

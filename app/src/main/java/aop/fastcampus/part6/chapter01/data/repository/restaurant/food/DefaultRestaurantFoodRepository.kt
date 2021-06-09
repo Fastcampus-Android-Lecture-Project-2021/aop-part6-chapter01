@@ -33,6 +33,10 @@ class DefaultRestaurantFoodRepository(
         foodMenuBasketDao.insert(restaurantFoodEntity)
     }
 
+    override suspend fun removeFoodMenuListInBasket(foodId: String) = withContext(ioDispatcher) {
+        foodMenuBasketDao.delete(foodId)
+    }
+
     override suspend fun clearFoodMenuListInBasket() = withContext(ioDispatcher) {
         foodMenuBasketDao.deleteAll()
     }

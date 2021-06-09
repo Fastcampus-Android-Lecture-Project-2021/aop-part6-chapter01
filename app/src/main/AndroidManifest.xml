@@ -26,7 +26,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".screen.home.restaurant.detail.RestaurantDetailActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".screen.order.OrderMenuActivity"
+        <activity android:name=".screen.order.OrderMenuListActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data

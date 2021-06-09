@@ -42,4 +42,6 @@
     <string name="order">주문하기</string>
     <string name="logout">로그아웃</string>
     <string name="google_login_required">구글로그인이 필요합니다.</string>
+    <string name="order_list_check">주문 확인</string>
+    <string name="do_order">주문하기</string>
 </resources>
