@@ -134,6 +134,7 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
         restaurantImage.load(restaurantEntity.restaurantImageUrl)
         restaurantMainTitleTextView.text = restaurantEntity.restaurantTitle
         ratingBar.rating = restaurantEntity.grade
+        ratingTextView.text = restaurantEntity.grade.toString()
         deliveryTimeText.text =
             getString(R.string.delivery_expected_time, restaurantEntity.deliveryTimeRange.first, restaurantEntity.deliveryTimeRange.second)
         deliveryTipText.text =

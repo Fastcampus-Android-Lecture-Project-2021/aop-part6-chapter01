@@ -1,6 +1,5 @@
 package aop.fastcampus.part6.chapter01.di
 
-import aop.fastcampus.part6.chapter01.data.db.firebase.FirebaseDBKey
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
 import aop.fastcampus.part6.chapter01.data.entity.locaion.MapSearchInfoEntity
 import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantEntity
@@ -30,7 +29,6 @@ import aop.fastcampus.part6.chapter01.util.provider.DefaultResourcesProvider
 import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.ktx.app
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
