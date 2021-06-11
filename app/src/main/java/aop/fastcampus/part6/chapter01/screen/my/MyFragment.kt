@@ -102,6 +102,7 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
                     val user = firebaseAuth.currentUser
                     viewModel.setUserInfo(user)
                 } else {
+                    firebaseAuth.signOut()
                     viewModel.setUserInfo(null)
                 }
             }

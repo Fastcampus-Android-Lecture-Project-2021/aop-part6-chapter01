@@ -1,5 +1,6 @@
 package aop.fastcampus.part6.chapter01.di
 
+import aop.fastcampus.part6.chapter01.data.db.firebase.FirebaseDBKey
 import aop.fastcampus.part6.chapter01.data.entity.locaion.LocationLatLngEntity
 import aop.fastcampus.part6.chapter01.data.entity.locaion.MapSearchInfoEntity
 import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantEntity
@@ -7,6 +8,8 @@ import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantFoodEntit
 import aop.fastcampus.part6.chapter01.data.preference.AppPreferenceManager
 import aop.fastcampus.part6.chapter01.data.repository.map.DefaultMapRepository
 import aop.fastcampus.part6.chapter01.data.repository.map.MapRepository
+import aop.fastcampus.part6.chapter01.data.repository.order.DefaultOrderRepository
+import aop.fastcampus.part6.chapter01.data.repository.order.OrderRepository
 import aop.fastcampus.part6.chapter01.data.repository.restaurant.DefaultRestaurantRepository
 import aop.fastcampus.part6.chapter01.data.repository.restaurant.RestaurantRepository
 import aop.fastcampus.part6.chapter01.data.repository.restaurant.food.DefaultRestaurantFoodRepository
@@ -25,6 +28,9 @@ import aop.fastcampus.part6.chapter01.screen.order.OrderMenuListViewModel
 import aop.fastcampus.part6.chapter01.util.event.MenuChangeEventBus
 import aop.fastcampus.part6.chapter01.util.provider.DefaultResourcesProvider
 import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.app
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -52,12 +58,13 @@ val appModule = module {
         RestaurantMenuListViewModel(restaurantId, restaurantFoodList, get())
     }
 
-    viewModel { OrderMenuListViewModel(get()) }
+    viewModel { OrderMenuListViewModel(get(), get()) }
 
     single<MapRepository> { DefaultMapRepository(get(), get()) }
     single<RestaurantRepository> { DefaultRestaurantRepository(get(), get(), get()) }
     single<UserRepository> { DefaultUserRepository(get(), get(), get()) }
     single<RestaurantFoodRepository> { DefaultRestaurantFoodRepository(get(), get(), get()) }
+    single<OrderRepository> { DefaultOrderRepository(get(), get()) }
 
     single { provideGsonConverterFactory() }
     single { buildOkHttpClient() }
@@ -80,5 +87,7 @@ val appModule = module {
 
     single { Dispatchers.IO }
     single { Dispatchers.Main }
+
+    single { Firebase.firestore }
 
 }

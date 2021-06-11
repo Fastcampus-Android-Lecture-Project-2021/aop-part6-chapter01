@@ -30,6 +30,16 @@
             android:textStyle="bold"
             android:text="@string/order_list_check" />
 
+        <TextView
+            android:id="@+id/orderClearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_oder_menu"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView

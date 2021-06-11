@@ -5,6 +5,7 @@ import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -101,6 +102,11 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.checkMyBasket()
+    }
+
     override fun observeData() = viewModel.restaurantDetailStateLiveData.observe(this) {
         when (it) {
             is RestaurantDetailState.Loading -> {
@@ -176,12 +182,11 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
     }
 
     private fun notifyBasketCount(foodMenuListInBasket: List<RestaurantFoodEntity>?) = with(binding) {
-        basketCountTextView.text =
-            if (foodMenuListInBasket.isNullOrEmpty()) {
-                "0"
-            } else {
-                getString(R.string.basket_count, foodMenuListInBasket.size)
-            }
+        basketCountTextView.text = if (foodMenuListInBasket.isNullOrEmpty()) {
+            "0"
+        } else {
+            getString(R.string.basket_count, foodMenuListInBasket.size)
+        }
         basketButton.setOnClickListener {
             if (firebaseAuth.currentUser == null) {
                 alertLoginNeed {
@@ -191,6 +196,10 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
                     }
                 }
             } else {
+                if (foodMenuListInBasket.isNullOrEmpty()) {
+                    Toast.makeText(this@RestaurantDetailActivity, "장바구니에 주문할 메뉴를 추가해주세요.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 startActivity(
                     OrderMenuListActivity.newIntent(this@RestaurantDetailActivity)
                 )

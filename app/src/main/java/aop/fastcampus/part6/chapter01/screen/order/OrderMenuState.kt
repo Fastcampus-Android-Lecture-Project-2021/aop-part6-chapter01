@@ -13,8 +13,11 @@ sealed class OrderMenuState {
         val restaurantFoodModelList: List<FoodModel>? = null
     ): OrderMenuState()
 
+    object Order: OrderMenuState()
+
     data class Error(
-        @StringRes val messageId: Int
+        @StringRes val messageId: Int,
+        val e: Throwable
     ): OrderMenuState()
 
 }
