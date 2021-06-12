@@ -46,7 +46,11 @@
     <string name="do_order">주문하기</string>
     <string name="clear_oder_menu">주문 취소</string>
 
+    <string name="empty_like_restaurant_text">찜한 내역이 존재하지 않습니다.</string>
+
     <!-- Error -->
     <string name="request_error">요청했지만 예상치 못한 이슈가 발생했습니다 : %s</string>
     <string name="user_id_not_found">유저 ID가 존재하지 않습니다.</string>
+    <string name="liked">찜</string>
+    <string name="like_list">찜 리스트</string>
 </resources>

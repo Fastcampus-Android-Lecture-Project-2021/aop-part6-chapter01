@@ -24,6 +24,7 @@ import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantListViewM
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.RestaurantDetailViewModel
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.menu.RestaurantMenuListViewModel
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.review.RestaurantReviewListViewModel
+import aop.fastcampus.part6.chapter01.screen.like.RestaurantLikeListViewModel
 import aop.fastcampus.part6.chapter01.screen.my.MyViewModel
 import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationViewModel
 import aop.fastcampus.part6.chapter01.screen.order.OrderMenuListViewModel
@@ -43,6 +44,7 @@ val appModule = module {
 
     viewModel { MainViewModel() }
     viewModel { HomeViewModel(get(), get(), get()) }
+    viewModel { RestaurantLikeListViewModel(get()) }
     viewModel { MyViewModel(get(), get()) }
 
     factory { (restaurantCategory: RestaurantCategory, locationLatLngEntity: LocationLatLngEntity) ->

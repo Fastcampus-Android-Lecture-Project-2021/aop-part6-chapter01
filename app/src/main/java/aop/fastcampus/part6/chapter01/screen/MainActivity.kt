@@ -8,6 +8,7 @@ import aop.fastcampus.part6.chapter01.R
 import aop.fastcampus.part6.chapter01.databinding.ActivityMainBinding
 import aop.fastcampus.part6.chapter01.screen.base.BaseActivity
 import aop.fastcampus.part6.chapter01.screen.home.HomeFragment
+import aop.fastcampus.part6.chapter01.screen.like.RestaurantLikeListFragment
 import aop.fastcampus.part6.chapter01.screen.my.MyFragment
 import aop.fastcampus.part6.chapter01.util.event.MenuChangeEventBus
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -39,6 +40,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), BottomN
         return when(item.itemId) {
             R.id.menu_home -> {
                 showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
+                true
+            }
+            R.id.menu_like -> {
+                showFragment(RestaurantLikeListFragment.newInstance(), RestaurantLikeListFragment.TAG)
                 true
             }
             R.id.menu_my -> {

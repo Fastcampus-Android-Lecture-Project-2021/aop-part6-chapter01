@@ -7,6 +7,11 @@
         android:title="@string/home" />
 
     <item
+        android:id="@+id/menu_like"
+        android:icon="@drawable/ic_heart_disable"
+        android:title="@string/liked" />
+
+    <item
         android:id="@+id/menu_my"
         android:icon="@drawable/ic_my"
         android:title="@string/my" />
