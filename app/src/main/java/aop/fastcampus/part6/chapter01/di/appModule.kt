@@ -13,6 +13,8 @@ import aop.fastcampus.part6.chapter01.data.repository.restaurant.DefaultRestaura
 import aop.fastcampus.part6.chapter01.data.repository.restaurant.RestaurantRepository
 import aop.fastcampus.part6.chapter01.data.repository.restaurant.food.DefaultRestaurantFoodRepository
 import aop.fastcampus.part6.chapter01.data.repository.restaurant.food.RestaurantFoodRepository
+import aop.fastcampus.part6.chapter01.data.repository.restaurant.review.DefaultRestaurantReviewRepository
+import aop.fastcampus.part6.chapter01.data.repository.restaurant.review.RestaurantReviewRepository
 import aop.fastcampus.part6.chapter01.data.repository.user.DefaultUserRepository
 import aop.fastcampus.part6.chapter01.data.repository.user.UserRepository
 import aop.fastcampus.part6.chapter01.screen.MainViewModel
@@ -21,6 +23,7 @@ import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantCategory
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantListViewModel
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.RestaurantDetailViewModel
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.menu.RestaurantMenuListViewModel
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.review.RestaurantReviewListViewModel
 import aop.fastcampus.part6.chapter01.screen.my.MyViewModel
 import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationViewModel
 import aop.fastcampus.part6.chapter01.screen.order.OrderMenuListViewModel
@@ -56,6 +59,8 @@ val appModule = module {
         RestaurantMenuListViewModel(restaurantId, restaurantFoodList, get())
     }
 
+    viewModel { (restaurantTitle: String) -> RestaurantReviewListViewModel(restaurantTitle, get()) }
+
     viewModel { OrderMenuListViewModel(get(), get()) }
 
     single<MapRepository> { DefaultMapRepository(get(), get()) }
@@ -63,6 +68,7 @@ val appModule = module {
     single<UserRepository> { DefaultUserRepository(get(), get(), get()) }
     single<RestaurantFoodRepository> { DefaultRestaurantFoodRepository(get(), get(), get()) }
     single<OrderRepository> { DefaultOrderRepository(get(), get()) }
+    single<RestaurantReviewRepository> { DefaultRestaurantReviewRepository(get()) }
 
     single { provideGsonConverterFactory() }
     single { buildOkHttpClient() }

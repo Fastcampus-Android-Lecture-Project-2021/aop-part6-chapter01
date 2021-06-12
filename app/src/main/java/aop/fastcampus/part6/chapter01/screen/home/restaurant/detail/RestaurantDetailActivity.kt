@@ -20,6 +20,7 @@ import aop.fastcampus.part6.chapter01.screen.MainTabMenu
 import aop.fastcampus.part6.chapter01.screen.base.BaseActivity
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.RestaurantListFragment
 import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.menu.RestaurantMenuListFragment
+import aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.review.RestaurantReviewListFragment
 import aop.fastcampus.part6.chapter01.screen.order.OrderMenuListActivity
 import aop.fastcampus.part6.chapter01.util.event.MenuChangeEventBus
 import aop.fastcampus.part6.chapter01.widget.adapter.RestaurantDetailListFragmentPagerAdapter
@@ -150,7 +151,7 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
         )
 
         if (::viewPagerAdapter.isInitialized.not()) {
-            initViewPager(state.restaurantEntity.restaurantInfoId, state.restaurantFoodList)
+            initViewPager(state.restaurantEntity.restaurantInfoId, state.restaurantEntity.restaurantTitle, state.restaurantFoodList)
         }
 
         notifyBasketCount(state.foodMenuListInBasket)
@@ -162,24 +163,24 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
         }
     }
 
-    private fun initViewPager(restaurantId: Long, restaurantFoodList: List<RestaurantFoodEntity>?) = with(binding) {
+    private fun initViewPager(restaurantInfoId: Long, restaurantTitle: String, restaurantFoodList: List<RestaurantFoodEntity>?) {
         viewPagerAdapter = RestaurantDetailListFragmentPagerAdapter(
-            this@RestaurantDetailActivity,
+            this,
             listOf(
                 RestaurantMenuListFragment.newInstance(
-                    restaurantId,
+                    restaurantInfoId,
                     ArrayList(restaurantFoodList ?: listOf())
                 ),
-                RestaurantMenuListFragment.newInstance(
-                    restaurantId,
-                    ArrayList(restaurantFoodList ?: listOf())
+                RestaurantReviewListFragment.newInstance(
+                    restaurantTitle
                 ),
             )
         )
-        menuAndReviewViewPager.adapter = viewPagerAdapter
-        TabLayoutMediator(menuAndReviewTabLayout, menuAndReviewViewPager) { tab, position ->
+        binding.menuAndReviewViewPager.adapter = viewPagerAdapter
+        TabLayoutMediator(binding.menuAndReviewTabLayout, binding.menuAndReviewViewPager) { tab, position ->
             tab.setText(RestaurantDetailCategory.values()[position].categoryNameId)
         }.attach()
+
     }
 
     private fun notifyBasketCount(foodMenuListInBasket: List<RestaurantFoodEntity>?) = with(binding) {
