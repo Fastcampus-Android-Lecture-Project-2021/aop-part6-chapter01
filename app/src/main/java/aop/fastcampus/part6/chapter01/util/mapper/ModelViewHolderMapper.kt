@@ -2,11 +2,8 @@ package aop.fastcampus.part6.chapter01.util.mapper
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import aop.fastcampus.part6.chapter01.databinding.ViewholderFoodMenuBinding
-import aop.fastcampus.part6.chapter01.databinding.ViewholderLikeRestaurantBinding
-import aop.fastcampus.part6.chapter01.databinding.ViewholderOrderMenuBinding
+import aop.fastcampus.part6.chapter01.databinding.*
 import aop.fastcampus.part6.chapter01.model.CellType
-import aop.fastcampus.part6.chapter01.databinding.ViewholderRestaurantBinding
 import aop.fastcampus.part6.chapter01.model.Model
 import aop.fastcampus.part6.chapter01.screen.base.BaseViewModel
 import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
@@ -15,6 +12,7 @@ import aop.fastcampus.part6.chapter01.widget.adapter.viewholder.food.FoodMenuVie
 import aop.fastcampus.part6.chapter01.widget.adapter.viewholder.order.OrderMenuViewHolder
 import aop.fastcampus.part6.chapter01.widget.adapter.viewholder.restaurant.LikeRestaurantViewHolder
 import aop.fastcampus.part6.chapter01.widget.adapter.viewholder.restaurant.RestaurantViewHolder
+import aop.fastcampus.part6.chapter01.widget.adapter.viewholder.review.RestaurantReviewViewHolder
 
 object ModelViewHolderMapper {
 
@@ -51,6 +49,13 @@ object ModelViewHolderMapper {
                     viewModel,
                     resourcesProvider
                 )
+            CellType.REVIEW_CELL -> {
+                RestaurantReviewViewHolder(
+                    ViewholderRestaurantReviewBinding.inflate(inflater, parent, false),
+                    viewModel,
+                    resourcesProvider
+                )
+            }
         }
 
         return viewHolder as ModelViewHolder<M>

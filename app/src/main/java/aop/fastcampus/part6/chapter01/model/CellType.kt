@@ -6,5 +6,6 @@ enum class CellType {
     LIKE_RESTAURANT_CELL,
     FOOD_CELL,
     ORDER_FOOD_CELL,
+    REVIEW_CELL,
 
 }

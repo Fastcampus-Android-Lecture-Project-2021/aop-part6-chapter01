@@ -1,6 +1,6 @@
 package aop.fastcampus.part6.chapter01.screen.home.restaurant.detail.review
 
-import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantReviewEntity
+import aop.fastcampus.part6.chapter01.model.restaurant.RestaurantReviewModel
 
 sealed class RestaurantReviewState {
 
@@ -9,7 +9,7 @@ sealed class RestaurantReviewState {
     object Loading: RestaurantReviewState()
 
     data class Success(
-        val reviewList: List<RestaurantReviewEntity>
+        val reviewList: List<RestaurantReviewModel>
     ): RestaurantReviewState()
 
 }
