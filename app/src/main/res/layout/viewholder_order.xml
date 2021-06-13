@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/orderTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/order_history_title"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginStart="12dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/orderContentText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/orderTitleText"
+        app:layout_constraintStart_toStartOf="@id/orderTitleText"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:id="@+id/orderTotalPriceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/orderContentText"
+        app:layout_constraintTop_toBottomOf="@id/orderContentText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="20sp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        tools:text="5,000원"
+        android:textColor="@color/black" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

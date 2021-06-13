@@ -57,7 +57,7 @@ class OrderMenuListViewModel(
             val restaurantId = foodMenuList.first().restaurantId
             firebaseAuth.currentUser?.let { user ->
                 when (val data = orderRepository.orderMenu(user.uid, restaurantId, foodMenuList)) {
-                    is DefaultOrderRepository.Result.Success -> {
+                    is DefaultOrderRepository.Result.Success<*> -> {
                         restaurantFoodRepository.clearFoodMenuListInBasket()
                         orderMenuState.value = OrderMenuState.Order
                     }

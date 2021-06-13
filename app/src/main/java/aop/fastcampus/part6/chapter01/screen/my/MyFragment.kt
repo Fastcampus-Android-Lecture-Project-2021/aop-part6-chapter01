@@ -9,7 +9,10 @@ import androidx.core.view.isVisible
 import aop.fastcampus.part6.chapter01.R
 import aop.fastcampus.part6.chapter01.databinding.FragmentMyBinding
 import aop.fastcampus.part6.chapter01.extensions.load
+import aop.fastcampus.part6.chapter01.model.order.OrderModel
 import aop.fastcampus.part6.chapter01.screen.base.BaseFragment
+import aop.fastcampus.part6.chapter01.widget.adapter.ModelRecyclerAdapter
+import aop.fastcampus.part6.chapter01.widget.adapter.listener.order.OrderListListener
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -49,8 +52,12 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
         }
     }
 
+    private val adapter by lazy {
+        ModelRecyclerAdapter<OrderModel, MyViewModel>(listOf(), viewModel, adapterListener = object : OrderListListener { })
+    }
+
     override fun initViews() = with(binding) {
-        //recyclerView.adapter = adapter
+        recyclerView.adapter = adapter
         loginButton.setOnClickListener {
             signInGoogle()
         }
@@ -114,18 +121,14 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
         profileImageView.load(state.profileImageUri.toString(), 60f)
         userNameTextView.text = state.userName
 
-        /*if (state..isEmpty()) {
+        if (state.orderList.isEmpty()) {
             emptyResultTextView.isGone = false
             recyclerView.isGone = true
         } else {
             emptyResultTextView.isGone = true
             recyclerView.isGone = false
-            adapter.setProductList(state.productList) {
-                startActivity(
-                    ProductDetailActivity.newIntent(requireContext(), it.id)
-                )
-            }
-        }*/
+            adapter.submitList(state.orderList)
+        }
     }
 
     private fun handleErrorState(state: MyState.Error) {

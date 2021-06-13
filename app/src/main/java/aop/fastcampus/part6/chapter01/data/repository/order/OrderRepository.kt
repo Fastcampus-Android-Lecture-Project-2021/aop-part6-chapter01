@@ -4,6 +4,14 @@ import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantFoodEntit
 
 interface OrderRepository {
 
-    suspend fun orderMenu(userId: String, restaurantId: Long, foodMenuList: List<RestaurantFoodEntity>): DefaultOrderRepository.Result
+    suspend fun orderMenu(
+        userId: String,
+        restaurantId: Long,
+        foodMenuList: List<RestaurantFoodEntity>
+    ): DefaultOrderRepository.Result
+
+    suspend fun getAllOrderMenus(
+        userId: String
+    ): DefaultOrderRepository.Result
 
 }

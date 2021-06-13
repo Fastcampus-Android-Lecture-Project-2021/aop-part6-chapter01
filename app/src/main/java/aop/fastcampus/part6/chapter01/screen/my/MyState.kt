@@ -2,6 +2,7 @@ package aop.fastcampus.part6.chapter01.screen.my
 
 import android.net.Uri
 import androidx.annotation.StringRes
+import aop.fastcampus.part6.chapter01.model.order.OrderModel
 
 sealed class MyState {
 
@@ -18,6 +19,7 @@ sealed class MyState {
         data class Registered(
             val userName: String,
             val profileImageUri: Uri?,
+            val orderList: List<OrderModel>
         ): Success()
 
         object NotRegistered: Success()
@@ -25,7 +27,8 @@ sealed class MyState {
     }
 
     data class Error(
-        @StringRes val messageId: Int
+        @StringRes val messageId: Int,
+        val e: Throwable
     ): MyState()
 
 }
