@@ -6,7 +6,7 @@ data class ReviewEntity(
     val createdAt: Long,
     val content: String,
     val rating: Float,
-    val imageUrlList: List<String>,
+    val imageUrlList: List<String>? = null,
     val orderId: String,
     val restaurantTitle: String
 )
