@@ -12,7 +12,7 @@ class OrderViewHolder(
     private val binding: ViewholderOrderBinding,
     viewModel: BaseViewModel,
     resourcesProvider: ResourcesProvider
-): ModelViewHolder<OrderModel>(binding, viewModel, resourcesProvider) {
+) : ModelViewHolder<OrderModel>(binding, viewModel, resourcesProvider) {
 
     override fun reset() = Unit
 
@@ -23,8 +23,17 @@ class OrderViewHolder(
 
             val foodMenuList = model.foodMenuList
 
-            orderContentText.text = foodMenuList.toString()
-            orderTotalPriceText.text = resourcesProvider.getString(R.string.price, foodMenuList.map { it.price }.reduce { total, price -> total + price })
+            foodMenuList
+                .groupBy { it.title }
+                .entries.forEach { (title, menuList) ->
+                    val orderDataStr =
+                        orderContentText.text.toString() + "메뉴 : $title | 가격 : ${menuList.first().price}원 X ${menuList.size}\n"
+                    orderContentText.text = orderDataStr
+                }
+            orderContentText.text = orderContentText.text.trim()
+
+            orderTotalPriceText.text =
+                resourcesProvider.getString(R.string.price, foodMenuList.map { it.price }.reduce { total, price -> total + price })
         }
     }
 
