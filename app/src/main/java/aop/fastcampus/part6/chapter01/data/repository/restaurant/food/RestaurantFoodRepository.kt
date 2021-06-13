@@ -4,7 +4,7 @@ import aop.fastcampus.part6.chapter01.data.entity.restaurant.RestaurantFoodEntit
 
 interface RestaurantFoodRepository {
 
-    suspend fun getFoods(restaurantId: Long): List<RestaurantFoodEntity>
+    suspend fun getFoods(restaurantId: Long, restaurantTitle: String): List<RestaurantFoodEntity>
 
     suspend fun getAllFoodMenuListInBasket(): List<RestaurantFoodEntity>
 

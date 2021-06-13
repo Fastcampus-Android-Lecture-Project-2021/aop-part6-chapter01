@@ -28,11 +28,14 @@ import aop.fastcampus.part6.chapter01.screen.like.RestaurantLikeListViewModel
 import aop.fastcampus.part6.chapter01.screen.my.MyViewModel
 import aop.fastcampus.part6.chapter01.screen.mylocation.MyLocationViewModel
 import aop.fastcampus.part6.chapter01.screen.order.OrderMenuListViewModel
+import aop.fastcampus.part6.chapter01.screen.review.gallery.GalleryPhotoRepository
+import aop.fastcampus.part6.chapter01.screen.review.gallery.GalleryViewModel
 import aop.fastcampus.part6.chapter01.util.event.MenuChangeEventBus
 import aop.fastcampus.part6.chapter01.util.provider.DefaultResourcesProvider
 import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -65,12 +68,15 @@ val appModule = module {
 
     viewModel { OrderMenuListViewModel(get(), get()) }
 
+    viewModel { GalleryViewModel(get()) }
+
     single<MapRepository> { DefaultMapRepository(get(), get()) }
     single<RestaurantRepository> { DefaultRestaurantRepository(get(), get(), get()) }
     single<UserRepository> { DefaultUserRepository(get(), get(), get()) }
     single<RestaurantFoodRepository> { DefaultRestaurantFoodRepository(get(), get(), get()) }
     single<OrderRepository> { DefaultOrderRepository(get(), get()) }
     single<RestaurantReviewRepository> { DefaultRestaurantReviewRepository(get()) }
+    single { GalleryPhotoRepository(androidApplication()) }
 
     single { provideGsonConverterFactory() }
     single { buildOkHttpClient() }
@@ -95,5 +101,6 @@ val appModule = module {
     single { Dispatchers.Main }
 
     single { Firebase.firestore }
+    single { Firebase.storage }
 
 }

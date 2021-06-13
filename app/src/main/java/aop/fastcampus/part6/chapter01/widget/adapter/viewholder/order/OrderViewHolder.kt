@@ -6,6 +6,7 @@ import aop.fastcampus.part6.chapter01.model.order.OrderModel
 import aop.fastcampus.part6.chapter01.screen.base.BaseViewModel
 import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
 import aop.fastcampus.part6.chapter01.widget.adapter.listener.AdapterListener
+import aop.fastcampus.part6.chapter01.widget.adapter.listener.order.OrderListListener
 import aop.fastcampus.part6.chapter01.widget.adapter.viewholder.ModelViewHolder
 
 class OrderViewHolder(
@@ -14,7 +15,9 @@ class OrderViewHolder(
     resourcesProvider: ResourcesProvider
 ) : ModelViewHolder<OrderModel>(binding, viewModel, resourcesProvider) {
 
-    override fun reset() = Unit
+    override fun reset() {
+        binding.orderContentText.text = ""
+    }
 
     override fun bindData(model: OrderModel) {
         super.bindData(model)
@@ -37,6 +40,12 @@ class OrderViewHolder(
         }
     }
 
-    override fun bindViews(model: OrderModel, adapterListener: AdapterListener) = Unit
+    override fun bindViews(model: OrderModel, adapterListener: AdapterListener) {
+        if (adapterListener is OrderListListener) {
+            binding.root.setOnClickListener {
+                adapterListener.writeRestaurantReview(model.orderId, model.restaurantTitle)
+            }
+        }
+    }
 
 }

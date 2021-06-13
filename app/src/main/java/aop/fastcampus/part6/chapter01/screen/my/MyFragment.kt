@@ -11,6 +11,7 @@ import aop.fastcampus.part6.chapter01.databinding.FragmentMyBinding
 import aop.fastcampus.part6.chapter01.extensions.load
 import aop.fastcampus.part6.chapter01.model.order.OrderModel
 import aop.fastcampus.part6.chapter01.screen.base.BaseFragment
+import aop.fastcampus.part6.chapter01.screen.review.AddRestaurantReviewActivity
 import aop.fastcampus.part6.chapter01.widget.adapter.ModelRecyclerAdapter
 import aop.fastcampus.part6.chapter01.widget.adapter.listener.order.OrderListListener
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -53,7 +54,26 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
     }
 
     private val adapter by lazy {
-        ModelRecyclerAdapter<OrderModel, MyViewModel>(listOf(), viewModel, adapterListener = object : OrderListListener { })
+        ModelRecyclerAdapter<OrderModel, MyViewModel>(listOf(), viewModel, adapterListener = object : OrderListListener {
+
+            override fun writeRestaurantReview(orderId: String, restaurantTitle: String) {
+                startActivity(
+                    AddRestaurantReviewActivity.newIntent(requireContext(), orderId, restaurantTitle)
+                )
+            }
+
+        })
+    }
+
+    private var isFirstShown = false
+
+    override fun onResume() {
+        super.onResume()
+        if (isFirstShown.not()) {
+            isFirstShown = true
+        } else {
+            viewModel.fetchData()
+        }
     }
 
     override fun initViews() = with(binding) {

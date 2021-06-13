@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <application
         android:name=".Part6Chapter01Application"
         android:allowBackup="true"
@@ -27,6 +31,14 @@
         <activity android:name=".screen.home.restaurant.detail.RestaurantDetailActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".screen.order.OrderMenuListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen.review.camera.preview.ImagePreviewListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen.review.camera.CameraActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen.review.gallery.GalleryActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screen.review.AddRestaurantReviewActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data

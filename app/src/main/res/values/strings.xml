@@ -51,7 +51,22 @@
     <!-- Error -->
     <string name="request_error">요청했지만 예상치 못한 이슈가 발생했습니다 : %s</string>
     <string name="user_id_not_found">유저 ID가 존재하지 않습니다.</string>
+
+    <!-- like list -->
     <string name="liked">찜</string>
     <string name="like_list">찜 리스트</string>
+
     <string name="order_history_title">주문 내역 : %s</string>
+    <string name="add_restaurant_review">%s 리뷰 등록</string>
+    <string name="title">제목</string>
+    <string name="content">내용</string>
+    <string name="add_review">등록하기</string>
+    <string name="add_image">이미지 등록하기</string>
+    <string name="flash">플래시</string>
+    <string name="image_preview">미리보기</string>
+    <string name="delete">삭제</string>
+    <string name="confirm">확인</string>
+
+    <!-- Image Preview -->
+    <string name="images_page">(%d/%d)</string>
 </resources>
