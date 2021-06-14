@@ -33,6 +33,7 @@ import aop.fastcampus.part6.chapter01.screen.review.gallery.GalleryViewModel
 import aop.fastcampus.part6.chapter01.util.event.MenuChangeEventBus
 import aop.fastcampus.part6.chapter01.util.provider.DefaultResourcesProvider
 import aop.fastcampus.part6.chapter01.util.provider.ResourcesProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -66,7 +67,7 @@ val appModule = module {
 
     viewModel { (restaurantTitle: String) -> RestaurantReviewListViewModel(restaurantTitle, get()) }
 
-    viewModel { OrderMenuListViewModel(get(), get()) }
+    viewModel { OrderMenuListViewModel(get(), get(), get()) }
 
     viewModel { GalleryViewModel(get()) }
 
@@ -102,5 +103,6 @@ val appModule = module {
 
     single { Firebase.firestore }
     single { Firebase.storage }
+    single { FirebaseAuth.getInstance() }
 
 }
