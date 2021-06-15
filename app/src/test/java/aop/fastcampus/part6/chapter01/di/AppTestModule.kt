@@ -28,6 +28,4 @@ internal val appTestModule = module {
 
     single<OrderRepository> { TestOrderRepository() }
 
-    single { FirebaseAuth.getInstance() }
-
 }
