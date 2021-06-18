@@ -1,5 +1,7 @@
 # aop-part6-chapter01 - 배달앱 클론하기
 
+![배달앱 클론](https://imgur.com/84dhJEN.jpg)
+
 ---
 
 ## 아키텍쳐
